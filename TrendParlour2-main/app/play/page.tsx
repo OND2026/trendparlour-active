@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PageLayout from "../components/PageLayout";
 
 export default function PlayPage() {
   const [secretNumber, setSecretNumber] = useState(
@@ -31,86 +32,86 @@ export default function PlayPage() {
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#FAF9F6",
-        fontFamily: "Arial",
-      }}
-    >
-      <a
-        href="/"
+    <PageLayout>
+      <div
         style={{
-          marginBottom: "2rem",
-          textDecoration: "none",
-          color: "#555",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          fontFamily: "Arial",
         }}
       >
-        ← Home
-      </a>
+        <a
+          href="/"
+          style={{
+            marginBottom: "2rem",
+            textDecoration: "none",
+            color: "#555",
+          }}
+        >
+          ← Home
+        </a>
 
-      <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
-        🎮 Guess My Number
-      </h1>
+        <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
+          🎮 Guess My Number
+        </h1>
 
-      <p
-        style={{
-          fontSize: "1.3rem",
-          marginBottom: "2rem",
-        }}
-      >
-        {message}
-      </p>
+        <p
+          style={{
+            fontSize: "1.3rem",
+            marginBottom: "2rem",
+          }}
+        >
+          {message}
+        </p>
 
-      <input
-        type="number"
-        min="1"
-        max="10"
-        value={guess}
-        onChange={(e) => setGuess(e.target.value)}
-        style={{
-          padding: "12px",
-          fontSize: "1.2rem",
-          width: "120px",
-          textAlign: "center",
-          borderRadius: "10px",
-          marginBottom: "1rem",
-        }}
-      />
+        <input
+          type="number"
+          min="1"
+          max="10"
+          value={guess}
+          onChange={(e) => setGuess(e.target.value)}
+          style={{
+            padding: "12px",
+            fontSize: "1.2rem",
+            width: "120px",
+            textAlign: "center",
+            borderRadius: "10px",
+            marginBottom: "1rem",
+          }}
+        />
 
-      <button
-        onClick={checkGuess}
-        style={{
-          padding: "14px 30px",
-          border: "none",
-          borderRadius: "16px",
-          background: "#8B5CF6",
-          color: "white",
-          fontSize: "1rem",
-          cursor: "pointer",
-          marginBottom: "1rem",
-        }}
-      >
-        Guess
-      </button>
+        <button
+          onClick={checkGuess}
+          style={{
+            padding: "14px 30px",
+            border: "none",
+            borderRadius: "16px",
+            background: "#8B5CF6",
+            color: "white",
+            fontSize: "1rem",
+            cursor: "pointer",
+            marginBottom: "1rem",
+          }}
+        >
+          Guess
+        </button>
 
-      <button
-        onClick={newGame}
-        style={{
-          padding: "12px 24px",
-          border: "none",
-          borderRadius: "16px",
-          background: "#38BDF8",
-          color: "white",
-          cursor: "pointer",
-        }}
-      >
-        New Game
-      </button>
-    </main>
+        <button
+          onClick={newGame}
+          style={{
+            padding: "12px 24px",
+            border: "none",
+            borderRadius: "16px",
+            background: "#38BDF8",
+            color: "white",
+            cursor: "pointer",
+          }}
+        >
+          New Game
+        </button>
+      </div>
+    </PageLayout>
   );
 }

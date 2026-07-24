@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import PageLayout from '../components/PageLayout';
 
 type Challenge = {
   question: string;
@@ -91,17 +92,7 @@ export default function ChallengePage() {
   const isCorrect = selectedAnswer === challenge.correctAnswer;
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#FAF9F6',
-        padding: '24px',
-        fontFamily: 'Arial, sans-serif',
-      }}
-    >
+    <PageLayout>
       <div
         style={{
           width: '100%',
@@ -208,6 +199,6 @@ export default function ChallengePage() {
           </button>
         )}
       </div>
-    </main>
+    </PageLayout>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import PageLayout from "../components/PageLayout";
 
 const jokes = [
   "Why don't skeletons fight each other? They don't have the guts.",
@@ -19,15 +20,7 @@ export default function LaughPage() {
   const [joke, setJoke] = useState(randomJoke());
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#f8f9fa",
-      }}
-    >
+    <PageLayout>
       <div
         style={{
           textAlign: "center",
@@ -71,6 +64,6 @@ export default function LaughPage() {
           😂 Another Joke
         </button>
       </div>
-    </main>
+    </PageLayout>
   );
 }

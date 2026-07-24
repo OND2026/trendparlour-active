@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import PageLayout from '../components/PageLayout';
 
 const facts = [
   'Octopuses have three hearts.',
@@ -26,17 +27,7 @@ export default function WeirdPage() {
   };
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#FAF9F6',
-        padding: '24px',
-        fontFamily: 'Arial, sans-serif',
-      }}
-    >
+    <PageLayout>
       <div
         style={{
           width: '100%',
@@ -102,6 +93,6 @@ export default function WeirdPage() {
           🔄 Another Fact
         </button>
       </div>
-    </main>
+    </PageLayout>
   );
 }
