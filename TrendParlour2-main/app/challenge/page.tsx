@@ -1,22 +1,75 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/PageLayout';
 import PageTitle from '../components/PageTitle';
 
+type GameState = 'idle' | 'waiting' | 'ready' | 'result';
+
 export default function ChallengePage() {
-  const [result, setResult] = useState<string | null>(null);
-  const [isFlipping, setIsFlipping] = useState(false);
+  const [gameState, setGameState] = useState<GameState>('idle');
+  const [cardText, setCardText] = useState('Press start when you are ready.');
+  const [cardColor, setCardColor] = useState('#FFFFFF');
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
-  const handleFlip = () => {
-    setIsFlipping(true);
-    setResult(null);
+  const clearTimer = () => {
+    if (timeoutRef.current !== null) {
+      window.clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
 
-    window.setTimeout(() => {
-      const outcome = Math.random() < 0.5 ? 'Heads' : 'Tails';
-      setResult(outcome);
-      setIsFlipping(false);
-    }, 700);
+  const resetGame = () => {
+    clearTimer();
+    setGameState('idle');
+    setCardText('Press start when you are ready.');
+    setCardColor('#FFFFFF');
+    setStartTime(null);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimer();
+    };
+  }, []);
+
+  const startRound = () => {
+    clearTimer();
+    setGameState('waiting');
+    setCardText('Wait...');
+    setCardColor('#DC2626');
+    setStartTime(null);
+
+    const delay = Math.floor(Math.random() * 3001) + 2000;
+
+    timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = null;
+      setGameState('ready');
+      setCardText('CLICK!');
+      setCardColor('#16A34A');
+      setStartTime(Date.now());
+    }, delay);
+  };
+
+  const handleCardClick = () => {
+    if (gameState === 'waiting') {
+      clearTimer();
+      setGameState('result');
+      setCardText('Too early! Try again.');
+      setCardColor('#FFFFFF');
+      setStartTime(null);
+      return;
+    }
+
+    if (gameState === 'ready' && startTime !== null) {
+      const elapsed = Date.now() - startTime;
+      clearTimer();
+      setGameState('result');
+      setCardText(`Your reaction time: ${elapsed} ms`);
+      setCardColor('#FFFFFF');
+      setStartTime(null);
+    }
   };
 
   return (
@@ -45,36 +98,60 @@ export default function ChallengePage() {
         </a>
 
         <PageTitle
-          title='Coin Flip'
-          subtitle='Heads or Tails?'
+          title='Reaction Time'
+          subtitle='How fast are your reflexes?'
           titleStyle={{ fontSize: '2.4rem', margin: '0 0 8px', color: '#1F2937' }}
           subtitleStyle={{ fontSize: '1.05rem', color: '#6B7280' }}
         />
 
-        <button
-          onClick={handleFlip}
-          disabled={isFlipping}
-          style={{
-            width: '100%',
-            padding: '16px 24px',
-            border: 'none',
-            borderRadius: '16px',
-            background: '#FACC15',
-            color: '#222',
-            fontSize: '1rem',
-            fontWeight: 700,
-            cursor: isFlipping ? 'wait' : 'pointer',
-            boxShadow: '0 10px 20px rgba(0,0,0,0.12)',
-            marginBottom: '20px',
-          }}
-        >
-          {isFlipping ? 'Flipping...' : 'Flip Coin'}
-        </button>
+        {gameState === 'idle' && (
+          <button
+            onClick={startRound}
+            style={{
+              width: '100%',
+              padding: '16px 24px',
+              border: 'none',
+              borderRadius: '16px',
+              background: '#FACC15',
+              color: '#222',
+              fontSize: '1rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 10px 20px rgba(0,0,0,0.12)',
+              marginBottom: '20px',
+            }}
+          >
+            Start
+          </button>
+        )}
 
-        <div
+        {gameState === 'result' && (
+          <button
+            onClick={resetGame}
+            style={{
+              width: '100%',
+              padding: '16px 24px',
+              border: 'none',
+              borderRadius: '16px',
+              background: '#38BDF8',
+              color: '#FFFFFF',
+              fontSize: '1rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 10px 20px rgba(0,0,0,0.12)',
+              marginBottom: '20px',
+            }}
+          >
+            Try Again
+          </button>
+        )}
+
+        <button
+          type='button'
+          onClick={gameState === 'waiting' || gameState === 'ready' ? handleCardClick : undefined}
           style={{
             width: '100%',
-            background: '#FFFFFF',
+            background: cardColor,
             borderRadius: '20px',
             boxShadow: '0 12px 30px rgba(0, 0, 0, 0.08)',
             padding: '28px',
@@ -82,13 +159,15 @@ export default function ChallengePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#374151',
+            color: gameState === 'ready' ? '#FFFFFF' : '#374151',
             fontSize: '1.15rem',
             fontWeight: 600,
+            border: 'none',
+            cursor: gameState === 'waiting' || gameState === 'ready' ? 'pointer' : 'default',
           }}
         >
-          {isFlipping ? 'Spinning the coin...' : result ? `Result: ${result}` : 'Your result will appear here.'}
-        </div>
+          {cardText}
+        </button>
       </div>
     </PageLayout>
   );
