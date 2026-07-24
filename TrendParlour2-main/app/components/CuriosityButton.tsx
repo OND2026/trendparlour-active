@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 type CuriosityButtonProps = {
   href: string;
   color: string;
@@ -14,7 +18,13 @@ export default function CuriosityButton({
   text,
 }: CuriosityButtonProps) {
   return (
-    <a href={href} style={{ textDecoration: "none", display: "block" }}>
+    <motion.a
+      href={href}
+      style={{ textDecoration: "none", display: "block" }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 300, damping: 18 }}
+    >
       <button
         type="button"
         style={{
@@ -33,6 +43,6 @@ export default function CuriosityButton({
       >
         {emoji} {text}
       </button>
-    </a>
+    </motion.a>
   );
 }
