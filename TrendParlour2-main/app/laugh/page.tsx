@@ -3,21 +3,44 @@
 import { useState } from "react";
 import Link from "next/link";
 import PageLayout from "../components/PageLayout";
+import PageTitle from "../components/PageTitle";
 
-const jokes = [
-  "Why don't skeletons fight each other? They don't have the guts.",
-  "Why did the scarecrow win an award? Because he was outstanding in his field.",
-  "Why can't bicycles stand on their own? They are two tired.",
-  "Why did the computer go to therapy? It had too many bytes from the past.",
-  "What do you call fake spaghetti? An impasta.",
-  "Why did the coffee file a police report? It got mugged.",
-  "Why was the math book sad? It had too many problems.",
+const compliments = [
+  "You have excellent taste.",
+  "You’re more capable than you realize.",
+  "Someone is grateful you exist.",
+  "Your curiosity is one of your strengths.",
+  "You bring warmth to the people around you.",
+  "You make ordinary moments feel special.",
+  "Your kindness stands out more than you think.",
+  "You have a wonderfully thoughtful way of seeing things.",
+  "You inspire calm and confidence in others.",
+  "Your presence makes a room feel lighter.",
+  "You are genuinely thoughtful and memorable.",
+  "You have a beautiful way of being yourself.",
+  "Your ideas are more interesting than you give them credit for.",
+  "You deserve to feel proud of yourself today.",
+  "Your energy has a quiet magic to it.",
+  "You bring a little extra light wherever you go.",
+  "You are wonderfully genuine.",
+  "Your effort and heart are noticed.",
+  "You have a rare and lovely sense of character.",
+  "You are doing better than you think.",
+  "You make the world feel a bit brighter.",
 ];
 
 export default function LaughPage() {
-  const randomJoke = () => jokes[Math.floor(Math.random() * jokes.length)];
+  const [compliment, setCompliment] = useState(compliments[0]);
 
-  const [joke, setJoke] = useState(randomJoke());
+  const pickCompliment = () => {
+    const nextIndex = Math.floor(Math.random() * compliments.length);
+    setCompliment((current) => {
+      if (compliments[nextIndex] === current) {
+        return compliments[(nextIndex + 1) % compliments.length];
+      }
+      return compliments[nextIndex];
+    });
+  };
 
   return (
     <PageLayout>
@@ -30,9 +53,12 @@ export default function LaughPage() {
       >
         <Link href="/">← Home</Link>
 
-        <h1 style={{ fontSize: "3rem", marginTop: "1rem" }}>
-          😂 Make Me Laugh
-        </h1>
+        <PageTitle
+          title="Random Compliment"
+          subtitle="A tiny confidence boost."
+          titleStyle={{ fontSize: "3rem", marginTop: "1rem" }}
+          subtitleStyle={{ fontSize: "1.05rem", color: "#6B7280" }}
+        />
 
         <div
           style={{
@@ -43,13 +69,14 @@ export default function LaughPage() {
             boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
             fontSize: "1.4rem",
             lineHeight: "1.7",
+            color: "#374151",
           }}
         >
-          {joke}
+          {compliment}
         </div>
 
         <button
-          onClick={() => setJoke(randomJoke())}
+          onClick={pickCompliment}
           style={{
             marginTop: "2rem",
             padding: "14px 28px",
@@ -59,9 +86,10 @@ export default function LaughPage() {
             borderRadius: "14px",
             fontSize: "1rem",
             cursor: "pointer",
+            fontWeight: 700,
           }}
         >
-          😂 Another Joke
+          Give Me Another
         </button>
       </div>
     </PageLayout>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import PageLayout from "../components/PageLayout";
+import PageTitle from "../components/PageTitle";
 
 const routes = ["/laugh", "/play", "/challenge", "/weird"];
 
@@ -45,9 +46,10 @@ export default function SurprisePage() {
             ✨ Surprise Me
           </p>
 
-          <h1 style={{ fontSize: "2.75rem", margin: "0 0 0.75rem", color: "#111827" }}>
-            Surprise Me
-          </h1>
+          <PageTitle
+            title="Surprise Me"
+            titleStyle={{ fontSize: "2.75rem", margin: "0 0 0.75rem", color: "#111827" }}
+          />
 
           <p style={{ fontSize: "1.05rem", color: "#4b5563", marginBottom: "2rem" }}>
             Ready? We&apos;ll choose something fun.

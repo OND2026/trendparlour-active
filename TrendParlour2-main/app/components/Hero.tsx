@@ -1,4 +1,5 @@
 import CuriosityButton from "./CuriosityButton";
+import homeButtons from "../data/homeButtons";
 
 export default function Hero() {
   return (
@@ -42,22 +43,16 @@ export default function Hero() {
           marginTop: "2rem",
         }}
       >
-        <CuriosityButton href="/laugh" color="#7ED957" emoji="😊" text="Make Me Laugh" />
-        <CuriosityButton href="/play" color="#8B5CF6" emoji="🎮" text="Let Me Play" />
-        <CuriosityButton href="/surprise" color="#38BDF8" emoji="✨" text="Surprise Me" />
-        <CuriosityButton
-          href="/challenge"
-          color="#FACC15"
-          textColor="#222"
-          emoji="🧠"
-          text="Challenge Me"
-        />
-        <CuriosityButton
-          href="/weird"
-          color="#EC4899"
-          emoji="🌍"
-          text="Show Me Something Weird"
-        />
+        {homeButtons.map((button) => (
+          <CuriosityButton
+            key={button.href}
+            href={button.href}
+            color={button.color}
+            textColor={button.textColor}
+            emoji={button.emoji}
+            text={button.text}
+          />
+        ))}
       </div>
     </section>
   );

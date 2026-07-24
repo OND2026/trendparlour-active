@@ -2,33 +2,35 @@
 
 import { useState } from "react";
 import PageLayout from "../components/PageLayout";
+import PageTitle from "../components/PageTitle";
 
 export default function PlayPage() {
-  const [secretNumber, setSecretNumber] = useState(
-    Math.floor(Math.random() * 10) + 1
-  );
+  const [choices, setChoices] = useState("Pizza, Sushi, Burgers");
+  const [result, setResult] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState("");
+  const [isSpinning, setIsSpinning] = useState(false);
 
-  const [guess, setGuess] = useState("");
-  const [message, setMessage] = useState(
-    "I'm thinking of a number between 1 and 10."
-  );
+  function spinWheel() {
+    const options = choices
+      .split(",")
+      .map((option) => option.trim())
+      .filter(Boolean);
 
-  function checkGuess() {
-    const number = Number(guess);
-
-    if (number === secretNumber) {
-      setMessage("🎉 Correct! You guessed it!");
-    } else if (number < secretNumber) {
-      setMessage("⬆️ Too low! Try again.");
-    } else {
-      setMessage("⬇️ Too high! Try again.");
+    if (options.length < 2) {
+      setResult(null);
+      setFeedback("Please enter at least two choices so the wheel has something to pick from.");
+      return;
     }
-  }
 
-  function newGame() {
-    setSecretNumber(Math.floor(Math.random() * 10) + 1);
-    setGuess("");
-    setMessage("I'm thinking of a number between 1 and 10.");
+    setFeedback("");
+    setResult(null);
+    setIsSpinning(true);
+
+    window.setTimeout(() => {
+      const winner = options[Math.floor(Math.random() * options.length)];
+      setResult(winner);
+      setIsSpinning(false);
+    }, 1000);
   }
 
   return (
@@ -40,11 +42,15 @@ export default function PlayPage() {
           justifyContent: "center",
           alignItems: "center",
           fontFamily: "Arial",
+          width: "100%",
+          maxWidth: "560px",
+          textAlign: "center",
         }}
       >
         <a
           href="/"
           style={{
+            alignSelf: "flex-start",
             marginBottom: "2rem",
             textDecoration: "none",
             color: "#555",
@@ -53,64 +59,94 @@ export default function PlayPage() {
           ← Home
         </a>
 
-        <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
-          🎮 Guess My Number
-        </h1>
-
-        <p
-          style={{
-            fontSize: "1.3rem",
-            marginBottom: "2rem",
-          }}
-        >
-          {message}
-        </p>
-
-        <input
-          type="number"
-          min="1"
-          max="10"
-          value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-          style={{
-            padding: "12px",
-            fontSize: "1.2rem",
-            width: "120px",
-            textAlign: "center",
-            borderRadius: "10px",
-            marginBottom: "1rem",
-          }}
+        <PageTitle
+          title="Decision Wheel"
+          subtitle="Can't decide? Let the wheel choose."
+          titleStyle={{ fontSize: "3rem", marginBottom: "0.5rem" }}
+          subtitleStyle={{ fontSize: "1.1rem", color: "#6B7280" }}
         />
 
-        <button
-          onClick={checkGuess}
+        <div
           style={{
-            padding: "14px 30px",
-            border: "none",
-            borderRadius: "16px",
-            background: "#8B5CF6",
-            color: "white",
-            fontSize: "1rem",
-            cursor: "pointer",
-            marginBottom: "1rem",
+            width: "100%",
+            background: "#FFFFFF",
+            borderRadius: "24px",
+            padding: "2rem",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
           }}
         >
-          Guess
-        </button>
+          <label
+            htmlFor="choices"
+            style={{
+              display: "block",
+              textAlign: "left",
+              marginBottom: "0.75rem",
+              fontWeight: 600,
+              color: "#374151",
+            }}
+          >
+            Enter your choices
+          </label>
 
-        <button
-          onClick={newGame}
-          style={{
-            padding: "12px 24px",
-            border: "none",
-            borderRadius: "16px",
-            background: "#38BDF8",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
-          New Game
-        </button>
+          <input
+            id="choices"
+            type="text"
+            value={choices}
+            onChange={(e) => setChoices(e.target.value)}
+            placeholder="Pizza, Sushi, Burgers"
+            style={{
+              width: "100%",
+              padding: "14px 16px",
+              fontSize: "1rem",
+              borderRadius: "12px",
+              border: "1px solid #D1D5DB",
+              marginBottom: "1rem",
+              boxSizing: "border-box",
+            }}
+          />
+
+          <button
+            type="button"
+            onClick={spinWheel}
+            disabled={isSpinning}
+            style={{
+              width: "100%",
+              padding: "16px 24px",
+              border: "none",
+              borderRadius: "16px",
+              background: "#8B5CF6",
+              color: "white",
+              fontSize: "1rem",
+              fontWeight: 700,
+              cursor: isSpinning ? "wait" : "pointer",
+              marginBottom: "1rem",
+            }}
+          >
+            {isSpinning ? "Spinning..." : "Spin the Wheel"}
+          </button>
+
+          {feedback ? (
+            <p style={{ marginBottom: "1rem", color: "#DC2626", fontWeight: 600 }}>
+              {feedback}
+            </p>
+          ) : null}
+
+          {result ? (
+            <div
+              style={{
+                marginTop: "0.5rem",
+                padding: "1rem",
+                borderRadius: "16px",
+                background: "#F5F3FF",
+                color: "#4C1D95",
+                fontWeight: 700,
+              }}
+            >
+              <div style={{ marginBottom: "0.25rem" }}>🎉 The wheel chose:</div>
+              <div style={{ fontSize: "1.2rem" }}>{result}</div>
+            </div>
+          ) : null}
+        </div>
       </div>
     </PageLayout>
   );
