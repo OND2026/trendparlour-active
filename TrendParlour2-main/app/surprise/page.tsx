@@ -42,18 +42,12 @@ export default function SurprisePage() {
             boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
           }}
         >
-          <p style={{ fontSize: "1rem", color: "#7c8ca3", marginBottom: "0.75rem" }}>
-            ✨ Surprise Me
-          </p>
-
           <PageTitle
             title="Surprise Me"
+            subtitle="You never know what you'll discover."
             titleStyle={{ fontSize: "2.75rem", margin: "0 0 0.75rem", color: "#111827" }}
+            subtitleStyle={{ fontSize: "1.05rem", color: "#4b5563" }}
           />
-
-          <p style={{ fontSize: "1.05rem", color: "#4b5563", marginBottom: "2rem" }}>
-            Ready? We&apos;ll choose something fun.
-          </p>
 
           <button
             onClick={handleSurprise}
@@ -67,9 +61,10 @@ export default function SurprisePage() {
               fontWeight: 700,
               cursor: "pointer",
               boxShadow: "0 12px 24px rgba(56, 189, 248, 0.25)",
+              marginTop: "1.5rem",
             }}
           >
-            🎲 Surprise Me
+            ✨ Surprise Me
           </button>
         </div>
       </motion.div>
