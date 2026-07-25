@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 };
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: '#F8F7F2',
   width: 'device-width',
   initialScale: 1,
