@@ -1,0 +1,16 @@
+{
+  "name": "TrendParlour",
+  "short_name": "TrendParlour",
+  "description": "Playful web experiences for curiosity, laughter, and surprise.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F7F2",
+  "theme_color": "#F8F7F2",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

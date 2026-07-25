@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'TrendParlour home page preview',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: 'TrendParlour',
     description:
       'Stay Curious. Stay Playful. Explore playful web experiences designed to spark delight.',
-    images: ['/og-image.png'],
+    images: ['/og-image.svg'],
   },
   robots: {
     index: true,
@@ -57,12 +57,17 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  themeColor: '#F8F7F2',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-icon.png',
+    icon: '/icon.svg',
+    apple: '/icon.svg',
   },
   manifest: '/site.webmanifest',
+};
+
+export const viewport: Viewport = {
+  themeColor: '#F8F7F2',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
