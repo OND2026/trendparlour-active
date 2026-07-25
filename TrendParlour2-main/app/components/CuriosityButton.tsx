@@ -20,15 +20,14 @@ export default function CuriosityButton({
   return (
     <motion.a
       href={href}
-      style={{ textDecoration: "none", display: "block" }}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 300, damping: 18 }}
+      style={{ textDecoration: "none", display: "block", width: "100%" }}
     >
-      <button
-        type="button"
+      <motion.span
         style={{
-          padding: "14px 28px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "14px 24px",
           borderRadius: "16px",
           border: "none",
           background: color,
@@ -36,13 +35,16 @@ export default function CuriosityButton({
           fontSize: "1rem",
           fontWeight: 600,
           cursor: "pointer",
-          marginBottom: "12px",
-          width: "260px",
-          boxShadow: "0 10px 20px rgba(0,0,0,0.12)",
+          width: "100%",
+          boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
         }}
+        whileHover={{ scale: 1.02, boxShadow: "0 12px 24px rgba(0,0,0,0.14)" }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
       >
-        {emoji} {text}
-      </button>
+        <span style={{ marginRight: "0.6rem", fontSize: "1.05rem" }}>{emoji}</span>
+        <span>{text}</span>
+      </motion.span>
     </motion.a>
   );
 }

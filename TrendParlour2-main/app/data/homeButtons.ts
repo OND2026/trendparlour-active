@@ -8,34 +8,34 @@ type HomeButton = {
 
 const homeButtons: HomeButton[] = [
   {
-    href: "/laugh",
-    text: "Make Me Laugh",
-    emoji: "😊",
-    color: "#7ED957",
+    href: "/surprise",
+    text: "Surprise Me",
+    emoji: "🎲",
+    color: "#38BDF8",
   },
   {
     href: "/play",
-    text: "Let Me Play",
+    text: "Play a Mini Game",
     emoji: "🎮",
     color: "#8B5CF6",
   },
   {
-    href: "/surprise",
-    text: "Surprise Me",
-    emoji: "✨",
-    color: "#38BDF8",
-  },
-  {
     href: "/challenge",
-    text: "Challenge Me",
-    emoji: "🧠",
+    text: "Test My Reflexes",
+    emoji: "⚡",
     color: "#FACC15",
     textColor: "#222",
   },
   {
+    href: "/laugh",
+    text: "Make Me Laugh",
+    emoji: "😂",
+    color: "#7ED957",
+  },
+  {
     href: "/weird",
-    text: "Show Me Something Weird",
-    emoji: "🌍",
+    text: "Blow My Mind",
+    emoji: "🤯",
     color: "#EC4899",
   },
 ];
