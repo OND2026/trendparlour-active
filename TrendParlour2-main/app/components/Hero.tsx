@@ -8,6 +8,12 @@ import homeButtons from "../data/homeButtons";
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [focusedButton, setFocusedButton] = useState<number | null>(null);
+  const heroButtons = [
+    homeButtons[0],
+    { ...homeButtons[1], emoji: "🧠", text: "Curiosity Ladder" },
+    ...homeButtons.slice(2),
+  ];
+
   return (
     <section
       style={{
@@ -99,7 +105,7 @@ export default function Hero() {
             marginTop: "0.25rem",
           }}
         >
-          {homeButtons.map((button, index) => (
+          {heroButtons.map((button, index) => (
             <motion.div
               key={button.href}
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
