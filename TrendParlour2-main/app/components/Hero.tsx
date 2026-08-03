@@ -1,11 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import CuriosityButton from "./CuriosityButton";
 import homeButtons from "../data/homeButtons";
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const [focusedButton, setFocusedButton] = useState<number | null>(null);
   return (
     <section
       style={{
@@ -103,6 +105,17 @@ export default function Hero() {
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
               animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
               transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.28, delay: 0.18 + index * 0.1, ease: "easeOut" }}
+              whileHover={shouldReduceMotion ? undefined : { y: -2, scale: 1.01, boxShadow: "0 12px 24px rgba(0,0,0,0.12)" }}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.985, y: 0 }}
+              onFocusCapture={() => setFocusedButton(index)}
+              onBlurCapture={() => setFocusedButton((current) => (current === index ? null : current))}
+              style={{
+                width: "100%",
+                borderRadius: "18px",
+                overflow: "hidden",
+                boxShadow: focusedButton === index ? "0 0 0 3px rgba(31, 41, 55, 0.16), 0 10px 24px rgba(0,0,0,0.12)" : "0 8px 16px rgba(0,0,0,0.08)",
+                transition: "box-shadow 0.24s ease, transform 0.24s ease",
+              }}
             >
               <CuriosityButton
                 href={button.href}
