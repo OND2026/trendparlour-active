@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useState } from "react";
 import PageLayout from "../components/PageLayout";
 import PageTitle from "../components/PageTitle";
@@ -35,15 +36,17 @@ export default function PlayPage() {
 
   return (
     <PageLayout>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          fontFamily: "Arial",
           width: "100%",
-          maxWidth: "560px",
+          maxWidth: "680px",
           textAlign: "center",
         }}
       >
@@ -51,28 +54,24 @@ export default function PlayPage() {
           href="/"
           style={{
             alignSelf: "flex-start",
-            marginBottom: "2rem",
+            marginBottom: "1rem",
             textDecoration: "none",
-            color: "#555",
+            color: "#4B5563",
+            fontWeight: 600,
           }}
         >
           ← Home
         </a>
 
-        <PageTitle
-          title="Decision Wheel"
-          subtitle="Can't decide? Let the wheel choose."
-          titleStyle={{ fontSize: "3rem", marginBottom: "0.5rem" }}
-          subtitleStyle={{ fontSize: "1.1rem", color: "#6B7280" }}
-        />
+        <PageTitle title="Decision Wheel" subtitle="Can't decide? Let the wheel choose." />
 
         <div
           style={{
             width: "100%",
-            background: "#FFFFFF",
+            background: "#FFFDF8",
             borderRadius: "24px",
-            padding: "2rem",
-            boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
+            padding: "clamp(1.25rem, 3vw, 2rem)",
+            boxShadow: "0 14px 36px rgba(0, 0, 0, 0.07)",
           }}
         >
           <label
@@ -111,7 +110,7 @@ export default function PlayPage() {
             disabled={isSpinning}
             style={{
               width: "100%",
-              padding: "16px 24px",
+              padding: "15px 24px",
               border: "none",
               borderRadius: "16px",
               background: "#8B5CF6",
@@ -120,6 +119,8 @@ export default function PlayPage() {
               fontWeight: 700,
               cursor: isSpinning ? "wait" : "pointer",
               marginBottom: "1rem",
+              boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.22s ease, boxShadow 0.22s ease",
             }}
           >
             {isSpinning ? "Spinning..." : "Spin the Wheel"}
@@ -147,7 +148,7 @@ export default function PlayPage() {
             </div>
           ) : null}
         </div>
-      </div>
+      </motion.div>
     </PageLayout>
   );
 }

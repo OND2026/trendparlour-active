@@ -46,33 +46,28 @@ export default function SurprisePage() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         style={{
           width: "100%",
-          maxWidth: "560px",
+          maxWidth: "680px",
           textAlign: "center",
         }}
       >
-        <div style={{ textAlign: "left", marginBottom: "1.25rem" }}>
-          <Link href="/" style={{ color: "#2563eb", textDecoration: "none" }}>
+        <div style={{ textAlign: "left", marginBottom: "1rem" }}>
+          <Link href="/" style={{ color: "#4B5563", textDecoration: "none", fontWeight: 600 }}>
             ← Home
           </Link>
         </div>
 
         <div
           style={{
-            background: "white",
+            background: "#FFFDF8",
             borderRadius: "24px",
-            padding: "2.5rem",
-            boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
+            padding: "clamp(1.25rem, 3vw, 2rem)",
+            boxShadow: "0 14px 36px rgba(0, 0, 0, 0.07)",
           }}
         >
-          <PageTitle
-            title="Surprise Me"
-            subtitle="You never know what you'll discover."
-            titleStyle={{ fontSize: "2.75rem", margin: "0 0 0.75rem", color: "#111827" }}
-            subtitleStyle={{ fontSize: "1.05rem", color: "#4b5563" }}
-          />
+          <PageTitle title="Surprise Me" subtitle="You never know what you'll discover." />
 
           <div
             style={{
@@ -102,7 +97,9 @@ export default function SurprisePage() {
               fontWeight: 700,
               cursor: isSpinning ? "wait" : "pointer",
               boxShadow: "0 12px 24px rgba(56, 189, 248, 0.25)",
-              marginTop: "1.5rem",
+              marginTop: "1.25rem",
+              boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.22s ease, boxShadow 0.22s ease",
             }}
           >
             ✨ Surprise Me

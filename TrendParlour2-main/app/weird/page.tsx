@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import PageLayout from '../components/PageLayout';
 import PageTitle from '../components/PageTitle';
@@ -84,10 +85,13 @@ export default function WeirdPage() {
 
   return (
     <PageLayout>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         style={{
           width: '100%',
-          maxWidth: '720px',
+          maxWidth: '680px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -99,35 +103,30 @@ export default function WeirdPage() {
           href="/"
           style={{
             alignSelf: 'flex-start',
-            color: '#2563EB',
+            color: '#4B5563',
             textDecoration: 'none',
             fontWeight: 600,
-            marginBottom: '24px',
+            marginBottom: '1rem',
           }}
         >
           ← Home
         </a>
 
-        <PageTitle
-          title='Blow My Mind'
-          subtitle='A few facts that feel almost impossible.'
-          titleStyle={{ fontSize: '2.5rem', margin: '0 0 8px', color: '#1F2937' }}
-          subtitleStyle={{ fontSize: '1.05rem', color: '#6B7280' }}
-        />
+        <PageTitle title='Blow My Mind' subtitle='A few facts that feel almost impossible.' />
 
         <div
           style={{
-            background: '#FFFFFF',
-            borderRadius: '20px',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.08)',
-            padding: '32px 28px',
-            marginBottom: '20px',
+            background: '#FFFDF8',
+            borderRadius: '24px',
+            boxShadow: '0 14px 36px rgba(0, 0, 0, 0.07)',
+            padding: 'clamp(1.25rem, 3vw, 2rem)',
+            marginBottom: '1rem',
             width: '100%',
             minHeight: '180px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '1.2rem',
+            fontSize: 'clamp(1.05rem, 2vw, 1.2rem)',
             color: '#374151',
             lineHeight: 1.6,
           }}
@@ -141,17 +140,18 @@ export default function WeirdPage() {
             background: '#2563EB',
             color: '#FFFFFF',
             border: 'none',
-            borderRadius: '999px',
-            padding: '14px 24px',
+            borderRadius: '16px',
+            padding: '15px 24px',
             fontSize: '1rem',
             fontWeight: 600,
             cursor: 'pointer',
-            boxShadow: '0 8px 20px rgba(37, 99, 235, 0.2)',
+            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+            transition: 'transform 0.22s ease, boxShadow 0.22s ease',
           }}
         >
           🤯 Blow My Mind Again
         </button>
-      </div>
+      </motion.div>
     </PageLayout>
   );
 }

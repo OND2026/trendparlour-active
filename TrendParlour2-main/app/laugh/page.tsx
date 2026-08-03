@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
 import PageLayout from "../components/PageLayout";
@@ -78,30 +79,30 @@ export default function LaughPage() {
 
   return (
     <PageLayout>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         style={{
+          width: "100%",
+          maxWidth: "680px",
           textAlign: "center",
-          maxWidth: "700px",
-          padding: "2rem",
         }}
       >
-        <Link href="/">← Home</Link>
+        <Link href="/" style={{ display: "inline-flex", alignItems: "center", color: "#4B5563", textDecoration: "none", fontWeight: 600, marginBottom: "1rem" }}>
+          ← Home
+        </Link>
 
-        <PageTitle
-          title="Make Me Laugh"
-          subtitle="A clean joke for your next smile."
-          titleStyle={{ fontSize: "3rem", marginTop: "1rem" }}
-          subtitleStyle={{ fontSize: "1.05rem", color: "#6B7280" }}
-        />
+        <PageTitle title="Make Me Laugh" subtitle="A clean joke for your next smile." />
 
         <div
           style={{
-            background: "white",
-            padding: "2rem",
-            borderRadius: "16px",
-            marginTop: "2rem",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-            fontSize: "1.4rem",
+            background: "#FFFDF8",
+            padding: "clamp(1.25rem, 3vw, 2rem)",
+            borderRadius: "24px",
+            marginTop: "0.5rem",
+            boxShadow: "0 14px 36px rgba(0, 0, 0, 0.07)",
+            fontSize: "clamp(1.1rem, 2.2vw, 1.3rem)",
             lineHeight: "1.7",
             color: "#374151",
           }}
@@ -112,21 +113,22 @@ export default function LaughPage() {
         <button
           onClick={pickJoke}
           style={{
-            marginTop: "2rem",
-            padding: "16px 32px",
+            marginTop: "1.25rem",
+            padding: "15px 24px",
             background: "#7ED957",
             color: "white",
             border: "none",
-            borderRadius: "14px",
+            borderRadius: "16px",
             fontSize: "1rem",
             cursor: "pointer",
             fontWeight: 700,
             boxShadow: "0 10px 20px rgba(0,0,0,0.12)",
+            transition: "transform 0.22s ease, boxShadow 0.22s ease",
           }}
         >
           😂 Tell Me Another
         </button>
-      </div>
+      </motion.div>
     </PageLayout>
   );
 }

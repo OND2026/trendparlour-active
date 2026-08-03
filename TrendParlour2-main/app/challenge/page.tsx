@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import PageLayout from '../components/PageLayout';
 import PageTitle from '../components/PageTitle';
@@ -72,12 +73,28 @@ export default function ChallengePage() {
     }
   };
 
+  const buttonStyle = {
+    width: '100%',
+    padding: '15px 24px',
+    border: 'none',
+    borderRadius: '16px',
+    fontSize: '1rem',
+    fontWeight: 700,
+    cursor: 'pointer',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.22s ease, boxShadow 0.22s ease',
+    marginBottom: '1rem',
+  } as const;
+
   return (
     <PageLayout>
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         style={{
           width: '100%',
-          maxWidth: '560px',
+          maxWidth: '680px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -88,87 +105,66 @@ export default function ChallengePage() {
           href="/"
           style={{
             alignSelf: 'flex-start',
-            color: '#2563EB',
+            color: '#4B5563',
             textDecoration: 'none',
             fontWeight: 600,
-            marginBottom: '24px',
+            marginBottom: '1rem',
           }}
         >
           ← Home
         </a>
 
-        <PageTitle
-          title='Reaction Time'
-          subtitle='How fast are your reflexes?'
-          titleStyle={{ fontSize: '2.4rem', margin: '0 0 8px', color: '#1F2937' }}
-          subtitleStyle={{ fontSize: '1.05rem', color: '#6B7280' }}
-        />
+        <PageTitle title='Reaction Time' subtitle='How fast are your reflexes?' />
 
-        {gameState === 'idle' && (
-          <button
-            onClick={startRound}
-            style={{
-              width: '100%',
-              padding: '16px 24px',
-              border: 'none',
-              borderRadius: '16px',
-              background: '#FACC15',
-              color: '#222',
-              fontSize: '1rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              boxShadow: '0 10px 20px rgba(0,0,0,0.12)',
-              marginBottom: '20px',
-            }}
-          >
-            Start
-          </button>
-        )}
-
-        {gameState === 'result' && (
-          <button
-            onClick={resetGame}
-            style={{
-              width: '100%',
-              padding: '16px 24px',
-              border: 'none',
-              borderRadius: '16px',
-              background: '#38BDF8',
-              color: '#FFFFFF',
-              fontSize: '1rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              boxShadow: '0 10px 20px rgba(0,0,0,0.12)',
-              marginBottom: '20px',
-            }}
-          >
-            Try Again
-          </button>
-        )}
-
-        <button
-          type='button'
-          onClick={gameState === 'waiting' || gameState === 'ready' ? handleCardClick : undefined}
+        <div
           style={{
             width: '100%',
-            background: cardColor,
-            borderRadius: '20px',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.08)',
-            padding: '28px',
-            minHeight: '120px',
+            background: '#FFFDF8',
+            borderRadius: '24px',
+            padding: 'clamp(1.25rem, 3vw, 2rem)',
+            boxShadow: '0 14px 36px rgba(0, 0, 0, 0.07)',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: gameState === 'ready' ? '#FFFFFF' : '#374151',
-            fontSize: '1.15rem',
-            fontWeight: 600,
-            border: 'none',
-            cursor: gameState === 'waiting' || gameState === 'ready' ? 'pointer' : 'default',
+            flexDirection: 'column',
+            gap: '0.75rem',
           }}
         >
-          {cardText}
-        </button>
-      </div>
+          {gameState === 'idle' && (
+            <button onClick={startRound} style={{ ...buttonStyle, background: '#FACC15', color: '#222' }}>
+              Start
+            </button>
+          )}
+
+          {gameState === 'result' && (
+            <button onClick={resetGame} style={{ ...buttonStyle, background: '#38BDF8', color: '#FFFFFF' }}>
+              Try Again
+            </button>
+          )}
+
+          <button
+            type='button'
+            onClick={gameState === 'waiting' || gameState === 'ready' ? handleCardClick : undefined}
+            style={{
+              width: '100%',
+              background: cardColor,
+              borderRadius: '20px',
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.08)',
+              padding: '28px',
+              minHeight: '120px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: gameState === 'ready' ? '#FFFFFF' : '#374151',
+              fontSize: '1.15rem',
+              fontWeight: 600,
+              border: 'none',
+              cursor: gameState === 'waiting' || gameState === 'ready' ? 'pointer' : 'default',
+              transition: 'transform 0.22s ease, boxShadow 0.22s ease',
+            }}
+          >
+            {cardText}
+          </button>
+        </div>
+      </motion.div>
     </PageLayout>
   );
 }
