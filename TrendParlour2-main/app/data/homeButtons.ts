@@ -38,6 +38,12 @@ const homeButtons: HomeButton[] = [
     emoji: "🤯",
     color: "#EC4899",
   },
+  {
+    href: "/would-you-rather",
+    text: "Would You Rather",
+    emoji: "🤔",
+    color: "#F59E0B",
+  },
 ];
 
 export default homeButtons;
