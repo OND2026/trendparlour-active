@@ -1,26 +1,39 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import surpriseCategories, { type SurpriseCategory, type SurpriseDiscovery } from "../data/surpriseDiscoveries";
 
 type SurprisePhase = "idle" | "loading" | "revealed";
 
 const loadingMessages = [
-  "Opening the mystery box...",
-  "Scanning for something delightful...",
-  "Checking the curiosity shelves...",
+  "Searching...",
+  "Opening tiny door...",
+  "Consulting the curiosity goblin...",
+  "Shuffling the universe...",
   "Polishing a tiny surprise...",
-  "Shuffling the possibilities...",
 ];
 
-function pickCategory(previousCategoryId: string | null) {
+function pickCategory(previousCategoryId: string | null, previousDiscoveryId: number | null) {
   const availableCategories = surpriseCategories.filter((category) => category.id !== previousCategoryId);
-  const category = availableCategories[Math.floor(Math.random() * availableCategories.length)];
-  return category ?? surpriseCategories[0];
+  const category = availableCategories[Math.floor(Math.random() * availableCategories.length)] ?? surpriseCategories[0];
+  const categoryDiscoveries = category.discoveries.filter((discovery) => discovery.id !== previousDiscoveryId);
+
+  if (categoryDiscoveries.length === 0) {
+    return { category, discovery: category.discoveries[0] };
+  }
+
+  const discovery = categoryDiscoveries[Math.floor(Math.random() * categoryDiscoveries.length)];
+  return { category, discovery };
 }
 
-function pickDiscovery(category: SurpriseCategory) {
-  return category.discoveries[Math.floor(Math.random() * category.discoveries.length)];
+function getStoredCount() {
+  if (typeof window === "undefined") {
+    return 0;
+  }
+
+  const stored = window.localStorage.getItem("trendparlour-surprise-count");
+  const parsed = Number(stored);
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
 export default function SurpriseExperience() {
@@ -29,6 +42,10 @@ export default function SurpriseExperience() {
   const [currentDiscovery, setCurrentDiscovery] = useState<SurpriseDiscovery | null>(null);
   const [loadingMessage, setLoadingMessage] = useState(loadingMessages[0]);
   const [previousCategoryId, setPreviousCategoryId] = useState<string | null>(null);
+  const [previousDiscoveryId, setPreviousDiscoveryId] = useState<number | null>(null);
+  const [surpriseCount, setSurpriseCount] = useState(0);
+  const [celebration, setCelebration] = useState<string | null>(null);
+  const revealTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (phase !== "loading") {
@@ -45,29 +62,64 @@ export default function SurpriseExperience() {
     return () => window.clearInterval(interval);
   }, [phase]);
 
+  useEffect(() => {
+    return () => {
+      if (revealTimeoutRef.current !== null) {
+        window.clearTimeout(revealTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const revealSurprise = () => {
-    const nextCategory = pickCategory(previousCategoryId);
-    const nextDiscovery = pickDiscovery(nextCategory);
+    if (revealTimeoutRef.current !== null) {
+      window.clearTimeout(revealTimeoutRef.current);
+    }
+
+    const picked = pickCategory(previousCategoryId, previousDiscoveryId);
 
     setPhase("loading");
-    setLoadingMessage(loadingMessages[0]);
-    setCurrentCategory(nextCategory);
-    setCurrentDiscovery(nextDiscovery);
+    setLoadingMessage(loadingMessages[Math.floor(Math.random() * loadingMessages.length)]);
+    setCurrentCategory(picked.category);
+    setCurrentDiscovery(picked.discovery);
+    setCelebration(null);
 
-    window.setTimeout(() => {
-      setPreviousCategoryId(nextCategory.id);
+    revealTimeoutRef.current = window.setTimeout(() => {
+      setPreviousCategoryId(picked.category.id);
+      setPreviousDiscoveryId(picked.discovery.id);
+      setSurpriseCount((current) => {
+        const next = current + 1;
+        window.localStorage.setItem("trendparlour-surprise-count", String(next));
+        return next;
+      });
       setPhase("revealed");
     }, 700);
   };
 
   useEffect(() => {
+    setSurpriseCount(getStoredCount());
+  }, []);
+
+  useEffect(() => {
     revealSurprise();
   }, []);
+
+  useEffect(() => {
+    if (surpriseCount === 0) {
+      return;
+    }
+
+    const milestones = [10, 25, 50, 100];
+    if (milestones.includes(surpriseCount)) {
+      setCelebration("✨ Curiosity Level Up!");
+    }
+  }, [surpriseCount]);
 
   const content = useMemo(() => ({
     category: currentCategory,
     discovery: currentDiscovery,
   }), [currentCategory, currentDiscovery]);
+
+  const revealVisible = phase === "revealed" && Boolean(content.category && content.discovery);
 
   return (
     <section
@@ -151,10 +203,11 @@ export default function SurpriseExperience() {
             </div>
           ) : content.category && content.discovery ? (
             <div
+              key={`${content.category.id}-${content.discovery.id}`}
               style={{
-                opacity: 1,
-                transform: "scale(1)",
-                transition: "opacity 0.3s ease, transform 0.3s ease",
+                opacity: revealVisible ? 1 : 0,
+                transform: revealVisible ? "scale(1)" : "scale(0.98)",
+                transition: "opacity 0.24s ease, transform 0.24s ease",
                 display: "flex",
                 flexDirection: "column",
                 gap: "0.75rem",
@@ -226,24 +279,34 @@ export default function SurpriseExperience() {
           ) : null}
         </div>
 
-        <button
-          type="button"
-          onClick={revealSurprise}
-          style={{
-            alignSelf: "flex-start",
-            border: "1px solid #E4D8C5",
-            borderRadius: "999px",
-            background: "#F7F1E8",
-            color: "#1F2937",
-            padding: "0.72rem 1rem",
-            fontSize: "0.92rem",
-            fontWeight: 600,
-            cursor: "pointer",
-            transition: "transform 0.2s ease, box-shadow 0.2s ease",
-          }}
-        >
-          Surprise Me Again
-        </button>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+          {celebration ? (
+            <div style={{ fontSize: "0.9rem", color: "#7A5D2E", fontWeight: 600 }}>
+              {celebration}
+            </div>
+          ) : null}
+          <div style={{ fontSize: "0.9rem", color: "#6B7280" }}>
+            You&apos;ve discovered {surpriseCount} surprises.
+          </div>
+          <button
+            type="button"
+            onClick={revealSurprise}
+            style={{
+              alignSelf: "flex-start",
+              border: "1px solid #E4D8C5",
+              borderRadius: "999px",
+              background: "#F7F1E8",
+              color: "#1F2937",
+              padding: "0.72rem 1rem",
+              fontSize: "0.92rem",
+              fontWeight: 600,
+              cursor: "pointer",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
+            }}
+          >
+            Surprise Me Again
+          </button>
+        </div>
       </div>
     </section>
   );
