@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://trendparlour.com',
   },
+  verification: {
+    google: 'y91adU76tMVN7Bic8GbIT7zelFmQalTnvCcE6wAeajk',
+  },
   publisher: 'TrendParlour',
   openGraph: {
     title: 'TrendParlour',
