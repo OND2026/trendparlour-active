@@ -5,6 +5,7 @@ import { useState } from "react";
 import CuriosityButton from "./CuriosityButton";
 import DailyDiscovery from "./DailyDiscovery";
 import SupportTrendParlour from "./SupportTrendParlour";
+import SurpriseExperience from "./SurpriseExperience";
 import WelcomeBubble from "./WelcomeBubble";
 import homeButtons from "../data/homeButtons";
 
@@ -141,6 +142,7 @@ export default function Hero() {
 
         <SupportTrendParlour />
         <DailyDiscovery />
+        <SurpriseExperience />
       </div>
 
       <footer
