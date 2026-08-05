@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import CuriosityButton from "./CuriosityButton";
+import WelcomeBubble from "./WelcomeBubble";
 import homeButtons from "../data/homeButtons";
 
 export default function Hero() {
@@ -92,6 +93,8 @@ export default function Hero() {
             A playful corner of the internet filled with unexpected discoveries, quick games, weird facts, and delightful distractions.
           </motion.p>
         </motion.div>
+
+        <WelcomeBubble />
 
         <motion.div
           initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
