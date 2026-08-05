@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'TrendParlour' }],
   creator: 'TrendParlour',
+  alternates: {
+    canonical: 'https://trendparlour.com',
+  },
   publisher: 'TrendParlour',
   openGraph: {
     title: 'TrendParlour',
