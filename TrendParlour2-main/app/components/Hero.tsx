@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import CuriosityButton from "./CuriosityButton";
+import DailyDiscovery from "./DailyDiscovery";
 import SupportTrendParlour from "./SupportTrendParlour";
 import WelcomeBubble from "./WelcomeBubble";
 import homeButtons from "../data/homeButtons";
@@ -139,6 +140,7 @@ export default function Hero() {
         </motion.div>
 
         <SupportTrendParlour />
+        <DailyDiscovery />
       </div>
 
       <footer
