@@ -6,6 +6,11 @@ export type JournalCategorySlug =
   | "strange-history"
   | "curious-things";
 
+export type JournalPlaygroundLink = {
+  label: string;
+  href: string;
+};
+
 export type JournalEntry = {
   slug: string;
   title: string;
@@ -18,6 +23,7 @@ export type JournalEntry = {
   content: string[];
   relatedExperience: string;
   relatedExperienceLabel: string;
+  relatedPlaygrounds?: JournalPlaygroundLink[];
   tags: string[];
   relatedSlugs?: string[];
 };
@@ -79,6 +85,10 @@ export const journalEntries: JournalEntry[] = [
     ],
     relatedExperience: "/would-you-rather",
     relatedExperienceLabel: "Try a would-you-rather dilemma",
+    relatedPlaygrounds: [
+      { label: "Would You Rather", href: "/would-you-rather" },
+      { label: "Surprise Me", href: "/surprise" },
+    ],
     tags: ["internet culture", "curiosity", "sharing"],
     relatedSlugs: ["how-the-brain-fills-gaps", "the-quiet-power-of-patterns"],
   },
@@ -99,6 +109,10 @@ export const journalEntries: JournalEntry[] = [
     ],
     relatedExperience: "/challenge",
     relatedExperienceLabel: "Test your reflexes",
+    relatedPlaygrounds: [
+      { label: "Test My Reflexes", href: "/challenge" },
+      { label: "Curiosity Ladder", href: "/play" },
+    ],
     tags: ["psychology", "memory", "attention"],
     relatedSlugs: ["why-the-internet-loves-odd-details"],
   },
@@ -119,6 +133,10 @@ export const journalEntries: JournalEntry[] = [
     ],
     relatedExperience: "/surprise",
     relatedExperienceLabel: "Open a surprise discovery",
+    relatedPlaygrounds: [
+      { label: "Surprise Me", href: "/surprise" },
+      { label: "Blow My Mind", href: "/weird" },
+    ],
     tags: ["patterns", "observation", "discovery"],
     relatedSlugs: ["why-the-internet-loves-odd-details", "how-the-brain-fills-gaps"],
   },
@@ -139,6 +157,10 @@ export const journalEntries: JournalEntry[] = [
     ],
     relatedExperience: "/play",
     relatedExperienceLabel: "Play a mini game",
+    relatedPlaygrounds: [
+      { label: "Play a Mini Game", href: "/play" },
+      { label: "Make Me Laugh", href: "/laugh" },
+    ],
     tags: ["technology", "interfaces", "design"],
     relatedSlugs: ["why-the-internet-loves-odd-details"],
   },

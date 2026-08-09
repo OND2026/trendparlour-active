@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getJournalEntryBySlug, getRelatedEntries, journalEntries } from "../../data/journalEntries";
+import JournalPlaygroundLinks from "../../components/JournalPlaygroundLinks";
 
 function buildJsonLd(entry: NonNullable<ReturnType<typeof getJournalEntryBySlug>>) {
   return {
@@ -102,15 +103,11 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
             ))}
           </div>
 
-          <section style={{ marginBottom: "1rem", borderRadius: "20px", background: "#F7F1E8", border: "1px solid #E8DDCC", padding: "1rem" }}>
-            <h2 style={{ margin: "0 0 0.55rem", fontSize: "1rem" }}>Related discovery</h2>
-            <p style={{ margin: "0 0 0.7rem", color: "#4B5563", lineHeight: 1.6 }}>
-              This article is meant to lead naturally toward a playful experience.
-            </p>
-            <Link href={entry.relatedExperience} style={{ color: "#1F2937", textDecoration: "none", fontWeight: 700 }}>
-              {entry.relatedExperienceLabel} →
-            </Link>
-          </section>
+          <JournalPlaygroundLinks
+            links={entry.relatedPlaygrounds ?? [{ label: entry.relatedExperienceLabel, href: entry.relatedExperience }]}
+            title="Curious where this leads?"
+            intro="Read enough. Now go poke the idea."
+          />
 
           {relatedEntries.length > 0 ? (
             <section style={{ borderRadius: "20px", background: "#FFFDF8", border: "1px solid #E8DDCC", padding: "1rem" }}>
