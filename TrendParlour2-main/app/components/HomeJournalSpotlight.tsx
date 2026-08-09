@@ -16,27 +16,27 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
       aria-labelledby="home-curiosity-journal"
       style={{
         background: "#F8F7F2",
-        padding: "0 1rem 1.65rem",
+        padding: "0 1rem 1.2rem",
       }}
     >
       <div
         style={{
           maxWidth: "980px",
           margin: "0 auto",
-          borderRadius: "24px",
+          borderRadius: "22px",
           border: "1px solid #E8DDCC",
-          background: "#F7F1E8",
-          padding: "clamp(1rem, 3vw, 1.5rem)",
+          background: "#FBF6EE",
+          padding: "clamp(0.85rem, 2.4vw, 1.2rem)",
         }}
       >
-        <header style={{ marginBottom: "0.95rem" }}>
+        <header style={{ marginBottom: "0.75rem" }}>
           <p
             style={{
-              margin: "0 0 0.3rem",
+              margin: "0 0 0.2rem",
               color: "#7A5D2E",
-              fontSize: "0.8rem",
+              fontSize: "0.76rem",
               fontWeight: 700,
-              letterSpacing: "0.14em",
+              letterSpacing: "0.16em",
               textTransform: "uppercase",
             }}
           >
@@ -44,27 +44,27 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
           </p>
           <h2
             id="home-curiosity-journal"
-            style={{ margin: "0 0 0.4rem", fontSize: "clamp(1.4rem, 3.2vw, 1.9rem)", lineHeight: 1.2 }}
+            style={{ margin: "0 0 0.25rem", fontSize: "clamp(1.22rem, 2.7vw, 1.65rem)", lineHeight: 1.2 }}
           >
             Tiny questions. Surprisingly interesting answers.
           </h2>
-          <p style={{ margin: 0, color: "#4B5563", lineHeight: 1.65, maxWidth: "720px" }}>
-            Start with three curious reads, then jump back into everything else TrendParlour offers.
+          <p style={{ margin: 0, color: "#4B5563", lineHeight: 1.55, maxWidth: "560px", fontSize: "0.96rem" }}>
+            Three things worth wondering about.
           </p>
         </header>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: "0.75rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(205px, 1fr))", gap: "0.65rem" }}>
           {entries.map((entry) => (
             <article
               key={entry.slug}
               style={{
-                borderRadius: "18px",
+                borderRadius: "16px",
                 border: "1px solid #E7DDCF",
                 background: "#FFFFFF",
-                padding: "0.9rem",
+                padding: "0.78rem 0.8rem",
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.5rem",
+                gap: "0.42rem",
               }}
             >
               <div>
@@ -74,17 +74,17 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
                     borderRadius: "999px",
                     background: "#F7F1E8",
                     color: "#7A5D2E",
-                    fontSize: "0.75rem",
+                    fontSize: "0.72rem",
                     fontWeight: 700,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
-                    padding: "0.28rem 0.55rem",
+                    padding: "0.24rem 0.5rem",
                   }}
                 >
                   {entry.category}
                 </span>
               </div>
-              <h3 style={{ margin: 0, fontSize: "1.03rem", lineHeight: 1.35 }}>
+              <h3 style={{ margin: 0, fontSize: "1rem", lineHeight: 1.32 }}>
                 <Link
                   className="journal-spotlight-link"
                   href={`/journal/${entry.slug}`}
@@ -94,7 +94,7 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
                   {entry.title}
                 </Link>
               </h3>
-              <p style={{ margin: 0, color: "#4B5563", lineHeight: 1.6, flex: 1 }}>{entry.excerpt}</p>
+              <p style={{ margin: 0, color: "#4B5563", lineHeight: 1.55, flex: 1, fontSize: "0.95rem" }}>{entry.excerpt}</p>
               <Link
                 className="journal-spotlight-link"
                 href={`/journal/${entry.slug}`}
@@ -103,6 +103,7 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
                   color: "#7A5D2E",
                   fontWeight: 700,
                   alignSelf: "flex-start",
+                  fontSize: "0.94rem",
                 }}
                 aria-label={`Explore article: ${entry.title}`}
               >
@@ -112,7 +113,7 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
           ))}
         </div>
 
-        <div style={{ marginTop: "1rem" }}>
+        <div style={{ marginTop: "0.78rem" }}>
           <Link
             className="journal-spotlight-link"
             href="/journal"
@@ -122,9 +123,10 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
               fontWeight: 700,
               border: "1px solid #E7DDCF",
               borderRadius: "999px",
-              padding: "0.6rem 0.9rem",
+              padding: "0.5rem 0.82rem",
               display: "inline-flex",
               background: "#F7F1E8",
+              fontSize: "0.94rem",
             }}
           >
             Explore the Curiosity Journal →
