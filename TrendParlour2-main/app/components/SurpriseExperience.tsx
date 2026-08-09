@@ -126,7 +126,7 @@ export default function SurpriseExperience() {
       return "";
     }
 
-    return `TrendParlour surprise: ${content.discovery.title}\n${content.discovery.content}\n\nTry yours on TrendParlour 👀\nhttps://trendparlour.com`;
+    return `${content.discovery.title}\n${content.discovery.content}\n\nI got this on TrendParlour 👀\nTry yours: https://trendparlour.com/surprise`;
   }, [content.discovery]);
 
   const handleShare = async () => {
@@ -138,7 +138,7 @@ export default function SurpriseExperience() {
       if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
         await navigator.share({
           text: shareMessage,
-          url: "https://trendparlour.com",
+          url: "https://trendparlour.com/surprise",
         });
         setShareFeedback("Shared. Nice one ✨");
         return;
@@ -358,18 +358,26 @@ export default function SurpriseExperience() {
                 type="button"
                 onClick={handleShare}
                 style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.4rem",
+                  flex: "1 1 240px",
+                  minHeight: "44px",
                   border: "1px solid #DFC8A6",
                   borderRadius: "999px",
                   background: "#FFF6E8",
                   color: "#7A5D2E",
-                  padding: "0.72rem 0.95rem",
-                  fontSize: "0.9rem",
+                  padding: "0.75rem 1rem",
+                  fontSize: "0.92rem",
                   fontWeight: 700,
                   cursor: "pointer",
-                  whiteSpace: "nowrap",
+                  whiteSpace: "normal",
+                  textAlign: "center",
                 }}
               >
-                Send this to someone
+                <span aria-hidden="true">🔗</span>
+                Share this surprise
               </button>
             ) : null}
           </div>
