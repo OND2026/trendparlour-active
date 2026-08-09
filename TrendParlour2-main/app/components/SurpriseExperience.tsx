@@ -45,6 +45,7 @@ export default function SurpriseExperience() {
   const [previousDiscoveryId, setPreviousDiscoveryId] = useState<number | null>(null);
   const [surpriseCount, setSurpriseCount] = useState(0);
   const [celebration, setCelebration] = useState<string | null>(null);
+  const [shareFeedback, setShareFeedback] = useState<string | null>(null);
   const revealTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function SurpriseExperience() {
     setCurrentCategory(picked.category);
     setCurrentDiscovery(picked.discovery);
     setCelebration(null);
+    setShareFeedback(null);
 
     revealTimeoutRef.current = window.setTimeout(() => {
       setPreviousCategoryId(picked.category.id);
@@ -118,6 +120,50 @@ export default function SurpriseExperience() {
     category: currentCategory,
     discovery: currentDiscovery,
   }), [currentCategory, currentDiscovery]);
+
+  const shareMessage = useMemo(() => {
+    if (!content.discovery) {
+      return "";
+    }
+
+    return `TrendParlour surprise: ${content.discovery.title}\n${content.discovery.content}\n\nTry yours on TrendParlour 👀\nhttps://trendparlour.com`;
+  }, [content.discovery]);
+
+  const handleShare = async () => {
+    if (!shareMessage) {
+      return;
+    }
+
+    try {
+      if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+        await navigator.share({
+          text: shareMessage,
+          url: "https://trendparlour.com",
+        });
+        setShareFeedback("Shared. Nice one ✨");
+        return;
+      }
+
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareMessage);
+        setShareFeedback("Copied. Send it to someone curious 👀");
+        return;
+      }
+
+      const textArea = document.createElement("textarea");
+      textArea.value = shareMessage;
+      textArea.setAttribute("readonly", "");
+      textArea.style.position = "fixed";
+      textArea.style.top = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      setShareFeedback("Copied. Send it to someone curious 👀");
+    } catch {
+      setShareFeedback("Could not share this one yet.");
+    }
+  };
 
   const revealVisible = phase === "revealed" && Boolean(content.category && content.discovery);
 
@@ -288,24 +334,50 @@ export default function SurpriseExperience() {
           <div style={{ fontSize: "0.9rem", color: "#6B7280" }}>
             You&apos;ve discovered {surpriseCount} surprises.
           </div>
-          <button
-            type="button"
-            onClick={revealSurprise}
-            style={{
-              alignSelf: "flex-start",
-              border: "1px solid #E4D8C5",
-              borderRadius: "999px",
-              background: "#F7F1E8",
-              color: "#1F2937",
-              padding: "0.72rem 1rem",
-              fontSize: "0.92rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              transition: "transform 0.2s ease, box-shadow 0.2s ease",
-            }}
-          >
-            Surprise Me Again
-          </button>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", alignItems: "center" }}>
+            <button
+              type="button"
+              onClick={revealSurprise}
+              style={{
+                alignSelf: "flex-start",
+                border: "1px solid #E4D8C5",
+                borderRadius: "999px",
+                background: "#F7F1E8",
+                color: "#1F2937",
+                padding: "0.72rem 1rem",
+                fontSize: "0.92rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "transform 0.2s ease, box-shadow 0.2s ease",
+              }}
+            >
+              Surprise Me Again
+            </button>
+            {revealVisible ? (
+              <button
+                type="button"
+                onClick={handleShare}
+                style={{
+                  border: "1px solid #DFC8A6",
+                  borderRadius: "999px",
+                  background: "#FFF6E8",
+                  color: "#7A5D2E",
+                  padding: "0.72rem 0.95rem",
+                  fontSize: "0.9rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Send this to someone
+              </button>
+            ) : null}
+          </div>
+          {shareFeedback ? (
+            <div aria-live="polite" style={{ fontSize: "0.85rem", color: "#6B7280" }}>
+              {shareFeedback}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
