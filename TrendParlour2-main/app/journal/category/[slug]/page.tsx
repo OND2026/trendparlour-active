@@ -49,7 +49,19 @@ export default function JournalCategoryPage({ params }: JournalCategoryPageProps
     <main style={{ minHeight: "100vh", background: "#F8F7F2", color: "#1F2937" }}>
       <div style={{ maxWidth: "980px", margin: "0 auto", padding: "clamp(1rem, 3vw, 2rem)" }}>
         <nav style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
-          <Link href="/" style={{ color: "#4B5563", textDecoration: "none", fontWeight: 600 }}>
+          <Link
+            href="/"
+            style={{
+              color: "#7A5D2E",
+              textDecoration: "none",
+              fontWeight: 700,
+              border: "1px solid #E8DDCC",
+              background: "#FFFDF8",
+              borderRadius: "999px",
+              padding: "0.42rem 0.72rem",
+              display: "inline-flex",
+            }}
+          >
             ← Back to TrendParlour
           </Link>
           <Link href="/journal" style={{ color: "#7A5D2E", textDecoration: "none", fontWeight: 700 }}>

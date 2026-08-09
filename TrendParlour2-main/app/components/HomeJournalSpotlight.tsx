@@ -46,10 +46,10 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
             id="home-curiosity-journal"
             style={{ margin: "0 0 0.25rem", fontSize: "clamp(1.22rem, 2.7vw, 1.65rem)", lineHeight: 1.2 }}
           >
-            Tiny questions. Surprisingly interesting answers.
+            Enter the Curiosity Journal doorway.
           </h2>
           <p style={{ margin: 0, color: "#4B5563", lineHeight: 1.55, maxWidth: "560px", fontSize: "0.96rem" }}>
-            Three things worth wondering about.
+            Start with a few irresistible questions, then follow the thread into the full TrendParlour journal.
           </p>
         </header>
 
@@ -113,7 +113,7 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
           ))}
         </div>
 
-        <div style={{ marginTop: "0.78rem" }}>
+        <div style={{ marginTop: "0.78rem", display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
           <Link
             className="journal-spotlight-link"
             href="/journal"
@@ -129,7 +129,7 @@ export default function HomeJournalSpotlight({ entries }: HomeJournalSpotlightPr
               fontSize: "0.94rem",
             }}
           >
-            Explore the Curiosity Journal →
+            Open the Curiosity Journal →
           </Link>
         </div>
       </div>
