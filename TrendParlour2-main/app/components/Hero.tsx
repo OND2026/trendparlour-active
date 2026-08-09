@@ -3,8 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import CuriosityButton from "./CuriosityButton";
-import DailyDiscovery from "./DailyDiscovery";
-import SupportTrendParlour from "./SupportTrendParlour";
 import WelcomeBubble from "./WelcomeBubble";
 import homeButtons from "../data/homeButtons";
 
@@ -139,24 +137,7 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        <SupportTrendParlour />
-        <DailyDiscovery />
       </div>
-
-      <footer
-        style={{
-          marginTop: "2rem",
-          textAlign: "center",
-          color: "#7A7A72",
-          fontSize: "0.95rem",
-          lineHeight: 1.6,
-          letterSpacing: "0.02em",
-          paddingBottom: "0.5rem",
-        }}
-      >
-        <div>Stay Curious. Stay Playful.</div>
-        <div>© 2026 TrendParlour</div>
-      </footer>
     </section>
   );
 }

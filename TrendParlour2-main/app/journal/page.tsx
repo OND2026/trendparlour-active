@@ -25,6 +25,12 @@ export default function JournalPage() {
   return (
     <main style={{ minHeight: "100vh", background: "#F8F7F2", color: "#1F2937" }}>
       <div style={{ maxWidth: "980px", margin: "0 auto", padding: "clamp(1rem, 3vw, 2rem)" }}>
+        <nav style={{ marginBottom: "1rem" }}>
+          <Link href="/" style={{ color: "#7A5D2E", textDecoration: "none", fontWeight: 700 }}>
+            ← Back to TrendParlour
+          </Link>
+        </nav>
+
         <header style={{ marginBottom: "1.5rem" }}>
           <p style={{ margin: "0 0 0.45rem", color: "#7A5D2E", fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase" }}>
             Curiosity Journal

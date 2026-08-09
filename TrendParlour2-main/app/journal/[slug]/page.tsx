@@ -65,13 +65,17 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
   }
 
   const relatedEntries = getRelatedEntries(entry.slug);
+  const nextJournalHref = relatedEntries[0] ? `/journal/${relatedEntries[0].slug}` : "/journal";
 
   return (
     <main style={{ minHeight: "100vh", background: "#F8F7F2", color: "#1F2937" }}>
       <div style={{ maxWidth: "860px", margin: "0 auto", padding: "clamp(1rem, 3vw, 2rem)" }}>
-        <nav style={{ marginBottom: "1rem" }}>
+        <nav style={{ marginBottom: "1rem", display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
+          <Link href="/" style={{ color: "#4B5563", textDecoration: "none", fontWeight: 600 }}>
+            ← Back to TrendParlour
+          </Link>
           <Link href="/journal" style={{ color: "#7A5D2E", textDecoration: "none", fontWeight: 700 }}>
-            ← Back to the Journal
+            Back to Curiosity Journal
           </Link>
         </nav>
 
@@ -132,6 +136,21 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
               </div>
             </section>
           ) : null}
+
+          <section style={{ marginTop: "1rem", padding: "0.95rem", borderRadius: "16px", border: "1px solid #E8DDCC", background: "#FFFDF8" }}>
+            <h2 style={{ margin: "0 0 0.5rem", fontSize: "1rem" }}>Keep the curiosity going</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+              <Link href={nextJournalHref} style={{ textDecoration: "none", color: "#1F2937", fontWeight: 700 }}>
+                Explore another curiosity →
+              </Link>
+              <Link href="/journal" style={{ textDecoration: "none", color: "#7A5D2E", fontWeight: 700 }}>
+                Back to Curiosity Journal →
+              </Link>
+              <Link href="/" style={{ textDecoration: "none", color: "#4B5563", fontWeight: 600 }}>
+                Return to TrendParlour →
+              </Link>
+            </div>
+          </section>
         </article>
       </div>
     </main>
