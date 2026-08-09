@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { journalCategories, getJournalEntriesByCategory } from "../../../data/journalEntries";
+import { getJournalCategoryBySlug, getJournalEntriesByCategory, journalCategories } from "../../../data/journalEntries";
 
 type JournalCategoryPageProps = {
   params: { slug: string };
 };
 
+export async function generateStaticParams() {
+  return journalCategories.map((category) => ({ slug: category.slug }));
+}
+
 export function generateMetadata({ params }: JournalCategoryPageProps): Metadata {
-  const category = journalCategories.find((item) => item.slug === params.slug);
+  const category = getJournalCategoryBySlug(params.slug);
 
   if (!category) {
     return {
@@ -33,7 +37,7 @@ export function generateMetadata({ params }: JournalCategoryPageProps): Metadata
 }
 
 export default function JournalCategoryPage({ params }: JournalCategoryPageProps) {
-  const category = journalCategories.find((item) => item.slug === params.slug);
+  const category = getJournalCategoryBySlug(params.slug);
 
   if (!category) {
     notFound();
@@ -60,6 +64,29 @@ export default function JournalCategoryPage({ params }: JournalCategoryPageProps
           <p style={{ margin: 0, maxWidth: "720px", color: "#4B5563", lineHeight: 1.7 }}>{category.description}</p>
         </header>
 
+        <section style={{ marginBottom: "1.1rem" }} aria-label="Other categories">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
+            {journalCategories.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/journal/category/${item.slug}`}
+                style={{
+                  textDecoration: "none",
+                  color: item.slug === category.slug ? "#1F2937" : "#4B5563",
+                  padding: "0.45rem 0.7rem",
+                  borderRadius: "999px",
+                  background: item.slug === category.slug ? "#F1E4C9" : "#FFFDF8",
+                  border: "1px solid #E7DDCF",
+                  fontSize: "0.9rem",
+                  fontWeight: item.slug === category.slug ? 700 : 500,
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <div style={{ display: "grid", gap: "0.8rem" }}>
           {entries.map((entry) => (
             <article key={entry.slug} style={{ borderRadius: "20px", background: "#FFFDF8", border: "1px solid #E8DDCC", padding: "1rem" }}>
@@ -69,9 +96,14 @@ export default function JournalCategoryPage({ params }: JournalCategoryPageProps
                 </Link>
               </h2>
               <p style={{ margin: "0 0 0.55rem", color: "#4B5563", lineHeight: 1.6 }}>{entry.excerpt}</p>
-              <Link href={`/journal/${entry.slug}`} style={{ color: "#7A5D2E", textDecoration: "none", fontWeight: 700 }}>
-                Read article →
-              </Link>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem" }}>
+                <Link href={`/journal/${entry.slug}`} style={{ color: "#7A5D2E", textDecoration: "none", fontWeight: 700 }}>
+                  Read article →
+                </Link>
+                <Link href={entry.relatedExperience} style={{ color: "#1F2937", textDecoration: "none", fontWeight: 600 }}>
+                  {entry.relatedExperienceLabel} →
+                </Link>
+              </div>
             </article>
           ))}
         </div>

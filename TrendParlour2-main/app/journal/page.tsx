@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { journalCategories, journalEntries } from "../data/journalEntries";
+import { getJournalEntriesByCategory, journalCategories, journalEntries } from "../data/journalEntries";
 
 export const metadata: Metadata = {
   title: "Curiosity Journal | TrendParlour",
@@ -17,6 +17,11 @@ export const metadata: Metadata = {
 };
 
 export default function JournalPage() {
+  const categoryCounts = journalCategories.map((category) => ({
+    ...category,
+    count: getJournalEntriesByCategory(category.slug).length,
+  }));
+
   return (
     <main style={{ minHeight: "100vh", background: "#F8F7F2", color: "#1F2937" }}>
       <div style={{ maxWidth: "980px", margin: "0 auto", padding: "clamp(1rem, 3vw, 2rem)" }}>
@@ -36,13 +41,42 @@ export default function JournalPage() {
           <h2 id="journal-categories" style={{ margin: "0 0 0.7rem", fontSize: "1rem", color: "#1F2937" }}>
             Browse by category
           </h2>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
-            <Link href="/journal" style={{ textDecoration: "none", color: "#1F2937", padding: "0.55rem 0.8rem", borderRadius: "999px", background: "#F1E4C9", border: "1px solid #E8D8BF" }}>
-              All entries
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: "0.75rem" }}>
+            <Link
+              href="/journal"
+              style={{
+                textDecoration: "none",
+                color: "#1F2937",
+                padding: "0.9rem",
+                borderRadius: "18px",
+                background: "#F1E4C9",
+                border: "1px solid #E8D8BF",
+                fontWeight: 700,
+              }}
+            >
+              <div style={{ fontSize: "0.8rem", color: "#7A5D2E", marginBottom: "0.35rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                All entries
+              </div>
+              <div>Browse everything in the journal</div>
             </Link>
-            {journalCategories.map((category) => (
-              <Link key={category.slug} href={`/journal/category/${category.slug}`} style={{ textDecoration: "none", color: "#1F2937", padding: "0.55rem 0.8rem", borderRadius: "999px", background: "#FFFDF8", border: "1px solid #E7DDCF" }}>
-                {category.label}
+            {categoryCounts.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/journal/category/${category.slug}`}
+                style={{
+                  textDecoration: "none",
+                  color: "#1F2937",
+                  padding: "0.9rem",
+                  borderRadius: "18px",
+                  background: "#FFFDF8",
+                  border: "1px solid #E7DDCF",
+                }}
+              >
+                <div style={{ fontSize: "0.8rem", color: "#7A5D2E", marginBottom: "0.35rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                  {category.count} entries
+                </div>
+                <div style={{ fontWeight: 700, marginBottom: "0.3rem" }}>{category.label}</div>
+                <div style={{ color: "#4B5563", lineHeight: 1.55, fontSize: "0.95rem" }}>{category.description}</div>
               </Link>
             ))}
           </div>
@@ -56,9 +90,9 @@ export default function JournalPage() {
             {journalEntries.map((entry) => (
               <article key={entry.slug} style={{ borderRadius: "20px", background: "#FFFDF8", border: "1px solid #E8DDCC", padding: "1rem" }}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", alignItems: "center", marginBottom: "0.5rem" }}>
-                  <span style={{ padding: "0.3rem 0.6rem", borderRadius: "999px", background: "#F7F1E8", color: "#7A5D2E", fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  <Link href={`/journal/category/${entry.categorySlug}`} style={{ padding: "0.3rem 0.6rem", borderRadius: "999px", background: "#F7F1E8", color: "#7A5D2E", fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", textDecoration: "none" }}>
                     {entry.category}
-                  </span>
+                  </Link>
                   <span style={{ color: "#6B7280", fontSize: "0.83rem" }}>{entry.publishedAt}</span>
                   <span style={{ color: "#6B7280", fontSize: "0.83rem" }}>{entry.readingTime}</span>
                 </div>

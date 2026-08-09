@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { journalEntries } from './data/journalEntries';
+import { journalCategories, journalEntries } from './data/journalEntries';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://trendparlour.com';
@@ -8,6 +8,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.78,
+  }));
+
+  const journalCategoryRoutes = journalCategories.map((category) => ({
+    url: `${baseUrl}/journal/category/${category.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.82,
   }));
 
   return [
@@ -59,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.88,
     },
+    ...journalCategoryRoutes,
     ...journalRoutes,
   ];
 }

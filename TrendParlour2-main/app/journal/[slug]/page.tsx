@@ -77,9 +77,15 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
 
         <article>
           <header style={{ marginBottom: "1.1rem" }}>
-            <p style={{ margin: "0 0 0.45rem", color: "#7A5D2E", fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase" }}>
-              {entry.category}
-            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", alignItems: "center", marginBottom: "0.55rem" }}>
+              <Link
+                href={`/journal/category/${entry.categorySlug}`}
+                style={{ color: "#7A5D2E", fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", textDecoration: "none" }}
+              >
+                {entry.category}
+              </Link>
+              <span style={{ color: "#6B7280", fontSize: "0.85rem" }}>{entry.readingTime}</span>
+            </div>
             <h1 style={{ margin: "0 0 0.7rem", fontSize: "clamp(1.9rem, 3.7vw, 2.6rem)", lineHeight: 1.16, letterSpacing: "-0.025em" }}>
               {entry.title}
             </h1>
@@ -112,11 +118,16 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
           {relatedEntries.length > 0 ? (
             <section style={{ borderRadius: "20px", background: "#FFFDF8", border: "1px solid #E8DDCC", padding: "1rem" }}>
               <h2 style={{ margin: "0 0 0.7rem", fontSize: "1rem" }}>More from the journal</h2>
-              <div style={{ display: "grid", gap: "0.6rem" }}>
+              <div style={{ display: "grid", gap: "0.85rem" }}>
                 {relatedEntries.map((relatedEntry) => (
-                  <Link key={relatedEntry.slug} href={`/journal/${relatedEntry.slug}`} style={{ color: "#1F2937", textDecoration: "none", fontWeight: 700 }}>
-                    {relatedEntry.title}
-                  </Link>
+                  <article key={relatedEntry.slug} style={{ borderTop: "1px solid #F1E4D2", paddingTop: "0.8rem" }}>
+                    <Link href={`/journal/${relatedEntry.slug}`} style={{ color: "#1F2937", textDecoration: "none", fontWeight: 700, display: "block", marginBottom: "0.25rem" }}>
+                      {relatedEntry.title}
+                    </Link>
+                    <p style={{ margin: 0, color: "#4B5563", lineHeight: 1.6 }}>
+                      {relatedEntry.excerpt}
+                    </p>
+                  </article>
                 ))}
               </div>
             </section>
