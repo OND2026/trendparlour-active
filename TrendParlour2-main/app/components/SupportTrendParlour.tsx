@@ -39,19 +39,20 @@ export default function SupportTrendParlour() {
     <section
       style={{
         width: "min(100%, 760px)",
-        margin: "1.25rem auto 0",
-        padding: "1.4rem",
+        margin: "1.1rem auto 0",
+        padding: "1.1rem",
         borderRadius: "24px",
         background: "#F7F1E8",
         border: "1px solid #E8DDCC",
         boxShadow: "0 10px 24px rgba(31, 41, 55, 0.05)",
+        overflow: "hidden",
       }}
     >
-      <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+      <div style={{ textAlign: "center", marginBottom: "0.9rem" }}>
         <h2
           style={{
             margin: "0 0 0.35rem",
-            fontSize: "clamp(1.15rem, 2vw, 1.35rem)",
+            fontSize: "clamp(1.08rem, 2vw, 1.28rem)",
             lineHeight: 1.2,
             color: "#1F2937",
             letterSpacing: "-0.02em",
@@ -62,7 +63,7 @@ export default function SupportTrendParlour() {
         <p
           style={{
             margin: 0,
-            fontSize: "0.95rem",
+            fontSize: "0.92rem",
             color: "#6B7280",
             lineHeight: 1.6,
           }}
@@ -72,26 +73,29 @@ export default function SupportTrendParlour() {
       </div>
 
       <div
+        className="support-grid"
         style={{
           display: "grid",
-          gap: "0.9rem",
+          gap: "0.8rem",
           gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
         }}
       >
         {cards.map((card, index) => (
           <article
             key={card.title}
+            className="support-card"
             style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              padding: "1rem",
+              padding: "0.95rem",
               borderRadius: "18px",
               background: "#FFFDF8",
               border: "1px solid #EFE4D3",
               boxShadow: "0 6px 16px rgba(31, 41, 55, 0.04)",
               transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              minHeight: "190px",
+              minHeight: "180px",
+              overflowWrap: "anywhere",
             }}
           >
             <div>
@@ -101,9 +105,10 @@ export default function SupportTrendParlour() {
               <h3
                 style={{
                   margin: "0 0 0.4rem",
-                  fontSize: "1rem",
+                  fontSize: "0.98rem",
                   color: "#1F2937",
                   lineHeight: 1.3,
+                  overflowWrap: "anywhere",
                 }}
               >
                 {card.title}
@@ -111,7 +116,7 @@ export default function SupportTrendParlour() {
               <p
                 style={{
                   margin: 0,
-                  fontSize: "0.9rem",
+                  fontSize: "0.88rem",
                   color: "#4B5563",
                   lineHeight: 1.55,
                 }}
@@ -128,7 +133,7 @@ export default function SupportTrendParlour() {
                 border: "none",
                 borderRadius: "999px",
                 padding: "0.7rem 0.9rem",
-                fontSize: "0.88rem",
+                fontSize: "0.86rem",
                 fontWeight: 600,
                 color: card.disabled ? "#7A7A72" : "#1F2937",
                 background: card.disabled ? "#F0E9DE" : "#F4E6C9",
@@ -141,6 +146,17 @@ export default function SupportTrendParlour() {
           </article>
         ))}
       </div>
+      <style jsx global>{`
+        @media (max-width: 720px) {
+          .support-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .support-card {
+            min-height: auto;
+          }
+        }
+      `}</style>
     </section>
   );
 }

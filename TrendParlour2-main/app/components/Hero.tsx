@@ -20,11 +20,11 @@ export default function Hero() {
   return (
     <section
       style={{
-        minHeight: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         background: "#F8F7F2",
-        padding: "2rem 1.5rem 1.25rem",
+        padding: "1rem 1rem 1.25rem",
       }}
     >
       <div
@@ -36,7 +36,7 @@ export default function Hero() {
           alignItems: "center",
           textAlign: "center",
           width: "100%",
-          padding: "clamp(1rem, 4vw, 2rem) 0",
+          padding: "clamp(0.4rem, 2vw, 1rem) 0 0",
         }}
       >
         <motion.div
@@ -46,7 +46,7 @@ export default function Hero() {
           style={{
             maxWidth: "760px",
             width: "100%",
-            marginBottom: "clamp(2rem, 4.5vw, 3rem)",
+            marginBottom: "clamp(1.2rem, 3vw, 1.8rem)",
           }}
         >
           <motion.h1
@@ -54,8 +54,8 @@ export default function Hero() {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.45, ease: "easeOut" }}
             style={{
-              fontSize: "clamp(2.75rem, 6.5vw, 4.75rem)",
-              marginBottom: "0.85rem",
+              fontSize: "clamp(2.45rem, 6vw, 4.2rem)",
+              marginBottom: "0.6rem",
               lineHeight: 1.08,
               color: "#1F2937",
               letterSpacing: "-0.03em",
@@ -69,9 +69,9 @@ export default function Hero() {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.45, delay: 0.08, ease: "easeOut" }}
             style={{
-              fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
+              fontSize: "clamp(0.86rem, 1.55vw, 1rem)",
               color: "#6B7280",
-              marginBottom: "0.75rem",
+              marginBottom: "0.55rem",
               lineHeight: 1.6,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
@@ -88,8 +88,8 @@ export default function Hero() {
               margin: "0 auto",
               maxWidth: "620px",
               color: "#4B5563",
-              fontSize: "clamp(0.95rem, 1.6vw, 1.05rem)",
-              lineHeight: 1.7,
+              fontSize: "clamp(0.92rem, 1.55vw, 1rem)",
+              lineHeight: 1.65,
             }}
           >
             A playful corner of the internet filled with unexpected discoveries, quick games, weird facts, and delightful distractions.
@@ -105,9 +105,9 @@ export default function Hero() {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "0.85rem",
-            width: "min(100%, 320px)",
-            marginTop: "0.25rem",
+            gap: "0.7rem",
+            width: "min(100%, 340px)",
+            marginTop: "0.2rem",
           }}
         >
           {heroButtons.map((button, index) => (
@@ -124,7 +124,7 @@ export default function Hero() {
                 width: "100%",
                 borderRadius: "18px",
                 overflow: "hidden",
-                boxShadow: focusedButton === index ? "0 0 0 3px rgba(31, 41, 55, 0.16), 0 10px 24px rgba(0,0,0,0.12)" : "0 8px 16px rgba(0,0,0,0.08)",
+                boxShadow: focusedButton === index ? "0 0 0 3px rgba(31, 41, 55, 0.16), 0 10px 24px rgba(0,0,0,0.12)" : "0 7px 14px rgba(0,0,0,0.08)",
                 transition: "box-shadow 0.24s ease, transform 0.24s ease",
               }}
             >

@@ -140,7 +140,7 @@ export default function WelcomeBubble() {
     <div
       style={{
         width: "min(100%, 300px)",
-        margin: "0 auto 1rem",
+        margin: "0 auto 0.8rem",
         position: "relative",
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(6px)",
@@ -153,7 +153,7 @@ export default function WelcomeBubble() {
           background: "#FFF9F2",
           border: "1px solid #EDE3D8",
           borderRadius: "20px",
-          padding: "0.95rem 1rem 1rem",
+          padding: "0.8rem 0.95rem 0.95rem",
           boxShadow: "0 10px 24px rgba(31, 41, 55, 0.06)",
           display: "flex",
           alignItems: "flex-start",
@@ -192,10 +192,10 @@ export default function WelcomeBubble() {
 
         {activeMessage ? (
           <div style={{ maxWidth: "240px", transition: "opacity 0.18s ease" }}>
-            <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#1F2937", lineHeight: 1.4, marginBottom: "0.2rem" }}>
+            <div style={{ fontSize: "0.92rem", fontWeight: 700, color: "#1F2937", lineHeight: 1.4, marginBottom: "0.2rem" }}>
               {activeMessage.headline}
             </div>
-            <div style={{ fontSize: "0.84rem", color: "#6B7280", lineHeight: 1.45 }}>
+            <div style={{ fontSize: "0.82rem", color: "#6B7280", lineHeight: 1.45 }}>
               {activeMessage.support}
             </div>
           </div>

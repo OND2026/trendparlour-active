@@ -28,6 +28,7 @@ export default function CuriosityButton({
         width: "100%",
         borderRadius: "16px",
         outline: "none",
+        minHeight: "52px",
       }}
       whileHover={shouldReduceMotion ? undefined : { scale: 1.01, y: -1, boxShadow: "0 14px 28px rgba(0,0,0,0.14)" }}
       whileTap={shouldReduceMotion ? undefined : { scale: 0.985 }}
@@ -39,20 +40,20 @@ export default function CuriosityButton({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "14px 24px",
+          padding: "13px 18px",
           borderRadius: "16px",
           border: "none",
           background: color,
           color: textColor,
-          fontSize: "1rem",
+          fontSize: "clamp(0.95rem, 1.2vw, 1rem)",
           fontWeight: 600,
           cursor: "pointer",
           width: "100%",
-          boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
+          boxShadow: "0 7px 14px rgba(0,0,0,0.09)",
           transition: "transform 0.2s ease, box-shadow 0.2s ease",
         }}
       >
-        <span style={{ marginRight: "0.6rem", fontSize: "1.05rem" }}>{emoji}</span>
+        <span style={{ marginRight: "0.6rem", fontSize: "1.02rem" }}>{emoji}</span>
         <span>{text}</span>
       </motion.span>
     </motion.a>

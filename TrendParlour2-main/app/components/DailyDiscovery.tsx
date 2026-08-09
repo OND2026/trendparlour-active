@@ -75,8 +75,8 @@ export default function DailyDiscovery() {
     <section
       style={{
         width: "min(100%, 760px)",
-        margin: "1.4rem auto 0",
-        padding: "clamp(1rem, 2.4vw, 1.35rem)",
+        margin: "1.2rem auto 0",
+        padding: "clamp(0.95rem, 2.4vw, 1.25rem)",
         borderRadius: "24px",
         background: "#F7F1E8",
         border: "1px solid #E8DDCC",
@@ -85,16 +85,18 @@ export default function DailyDiscovery() {
       }}
     >
       <div
+        className="discovery-header"
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           gap: "0.8rem",
-          marginBottom: "1.05rem",
+          marginBottom: "0.95rem",
           flexWrap: "wrap",
         }}
       >
         <div
+          className="discovery-badge"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -113,6 +115,7 @@ export default function DailyDiscovery() {
           Daily Discovery
         </div>
         <div
+          className="discovery-countdown"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -142,7 +145,7 @@ export default function DailyDiscovery() {
           gap: "0.85rem",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.6rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.55rem" }}>
           <div style={{ fontSize: "clamp(2.1rem, 4vw, 2.8rem)" }} aria-hidden="true">
             {currentDiscovery.emoji}
           </div>
@@ -156,7 +159,7 @@ export default function DailyDiscovery() {
               background: "#FFFDF8",
               border: "1px solid #EDE3D8",
               color: "#6B7280",
-              fontSize: "0.78rem",
+              fontSize: "0.76rem",
               fontWeight: 600,
             }}
           >
@@ -184,7 +187,7 @@ export default function DailyDiscovery() {
               margin: 0,
               color: "#4B5563",
               lineHeight: 1.7,
-              fontSize: "0.95rem",
+              fontSize: "0.94rem",
               maxWidth: "620px",
             }}
           >
@@ -195,14 +198,27 @@ export default function DailyDiscovery() {
 
       <div
         style={{
-          marginTop: "1.05rem",
-          fontSize: "0.9rem",
+          marginTop: "0.95rem",
+          fontSize: "0.88rem",
           color: "#7A7A72",
           letterSpacing: "0.01em",
         }}
       >
         Come back tomorrow for another discovery.
       </div>
+      <style jsx global>{`
+        @media (max-width: 720px) {
+          .discovery-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          .discovery-countdown {
+            width: 100%;
+            justify-content: flex-start;
+          }
+        }
+      `}</style>
     </section>
   );
 }
