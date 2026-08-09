@@ -51,8 +51,8 @@ export default function Home() {
       <Hero />
       <HomeJournalSpotlight entries={featuredEntries} />
       <section style={{ background: '#F8F7F2', padding: '0 1rem 1.25rem' }}>
-        <SupportTrendParlour />
         <DailyDiscovery />
+        <SupportTrendParlour />
 
         <footer
           style={{
