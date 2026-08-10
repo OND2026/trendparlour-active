@@ -13,6 +13,11 @@ export type JournalPlaygroundLink = {
   href: string;
 };
 
+export type JournalSourceLink = {
+  label: string;
+  href: string;
+};
+
 export type JournalEntry = {
   slug: string;
   title: string;
@@ -22,12 +27,18 @@ export type JournalEntry = {
   publishedAt: string;
   updatedAt: string;
   readingTime: string;
+  series?: string;
+  seoTitle?: string;
+  metaDescription?: string;
   content: string[];
   relatedExperience: string;
   relatedExperienceLabel: string;
   relatedPlaygrounds?: JournalPlaygroundLink[];
+  sources?: JournalSourceLink[];
   tags: string[];
   relatedSlugs?: string[];
+  continuationCtaLabel?: string;
+  continuationCtaHref?: string;
 };
 
 export type JournalCategory = {
@@ -271,6 +282,154 @@ export const journalEntries: JournalEntry[] = [
     ],
     tags: ["weird facts", "plants", "science"],
     relatedSlugs: ["why-does-ice-float-in-water", "why-do-cats-purr"],
+  },
+  {
+    slug: "bone-collector-caterpillar",
+    title: "The Bone Collector: The Caterpillar That Wears Dead Bodies",
+    excerpt:
+      "Meet Hawaii's bizarre bone collector caterpillar: a carnivorous caterpillar that lives in spider webs, wears dead insects and even eats its own kind.",
+    category: "Nature / Weird",
+    categorySlug: "weird-facts",
+    publishedAt: "2026-08-10",
+    updatedAt: "2026-08-10",
+    readingTime: "4-5 min read",
+    series: "Nature Has Lost the Plot",
+    seoTitle: "The Bone Collector Caterpillar That Wears Dead Bodies | TrendParlour",
+    metaDescription:
+      "Meet Hawaii's bizarre bone collector caterpillar: a carnivorous caterpillar that lives in spider webs, wears dead insects and even eats its own kind.",
+    content: [
+      "Forget butterflies.",
+      "Somewhere in the forests of Hawaii, there is a caterpillar that lives inside a spider's web, steals the spider's leftovers, wears dead insects on its back, and eats other caterpillars.",
+      "And somehow, scientists think it's **kind of adorable.**",
+      "Meet the **bone collector caterpillar**.",
+      "Yes. That is its actual nickname.",
+      "## This Is Not The Very Hungry Caterpillar",
+      "In April 2025, researchers from the University of Hawaiʻi at Mānoa revealed one of the strangest creatures ever documented.",
+      "They found it in the Waiʻanae mountains on Oʻahu, living inside spider webs.",
+      "At first, they weren't even sure they were looking at a caterpillar.",
+      "It looked more like a tiny moving sack of rubbish.",
+      "Then the sack moved.",
+      "Inside was a caterpillar.",
+      "And on top of the caterpillar?",
+      "**Dead insects.**",
+      "Fly wings. Ant heads. Beetle parts. Weevil heads. Earwig remains. Even pieces of dead spiders.",
+      "It had basically turned itself into a walking corpse collection.",
+      "Nature had invented a goth handbag.",
+      "## It Lives In A Spider's Web",
+      "This is where things get ridiculous.",
+      "Most caterpillars eat plants. Leaves, flowers, stems, the usual green buffet.",
+      "The bone collector decided that was boring.",
+      "Instead, it lives inside spider webs and eats insects that the spider has already caught.",
+      "Think about that for a second.",
+      "The caterpillar has moved into the spider's house.",
+      "The spider's house is a giant trap designed to catch and kill things like caterpillars.",
+      "And the caterpillar is sitting there eating the spider's leftovers.",
+      "It's essentially living inside a lion's kitchen and ordering takeaway.",
+      "Researchers believe this works because the caterpillar isn't behaving like prey.",
+      "By covering itself with insect remains and shed material from the web, it appears to disguise its presence as nothing more interesting than discarded spider debris.",
+      "In other words:",
+      "**It evolved to look like garbage.**",
+      "And somehow, that is brilliant.",
+      "## But Why Wear Corpses?",
+      "The bone collector belongs to the Hawaiian moth genus *Hyposmocoma*, whose caterpillars are famous for building portable silk cases.",
+      "Other species decorate their cases with things like wood, algae, or shells.",
+      "The bone collector looked at the family tradition and apparently decided:",
+      "**\"What if we used dead bugs?\"**",
+      "Researchers observed the caterpillars selecting pieces of insects and attaching them to their silk cases.",
+      "And they weren't just randomly grabbing whatever was nearby.",
+      "They appeared to choose specific pieces and adjust them to fit.",
+      "Give one a collection of ordinary materials and insect remains, and it will repeatedly choose the dead insects.",
+      "It's not decorating.",
+      "It's curating.",
+      "The caterpillar isn't carrying luggage.",
+      "**It's carrying trophies.**",
+      "## And Yes, It Eats Its Own Kind",
+      "Here's where the story gets even darker.",
+      "Researchers placed two bone collector caterpillars together.",
+      "The larger one attacked and ate the smaller one.",
+      "So much for community spirit.",
+      "This may help explain why researchers typically find only one bone collector living in a spider web.",
+      "There is no shared apartment.",
+      "No caterpillar flatmate situation.",
+      "Just one tiny corpse-wearing predator enjoying an all-you-can-eat buffet.",
+      "And if another bone collector moves in?",
+      "The buffet gets a new item.",
+      "## It's Older Than Oʻahu",
+      "Here's the part that makes this creature even more fascinating.",
+      "Genetic evidence suggests the bone collector's lineage separated from other *Hyposmocoma* moths at least **six million years ago**.",
+      "That's older than the modern island of Oʻahu.",
+      "Its ancestors likely lived on older Hawaiian islands that have since eroded and disappeared beneath the Pacific.",
+      "Over millions of years, their descendants moved through the Hawaiian archipelago and evolved into increasingly specialised creatures.",
+      "The bone collector found one particularly bizarre niche:",
+      "**live in spider webs, steal spider food, and wear dead insects.**",
+      "Evolution really does have an imagination problem.",
+      "Except this time, the problem is that it has too much imagination.",
+      "## And There Are Barely Any Left",
+      "Despite surviving for millions of years, the bone collector is now extremely rare.",
+      "After more than two decades of field surveys, researchers documented only **62 individuals**.",
+      "The species survives in a tiny area of forest, roughly 15 square kilometres.",
+      "And it faces threats from invasive species, feral pigs, and habitat loss.",
+      "Which means this bizarre little creature may disappear before most of the world even knows it exists.",
+      "That's the strange tragedy of evolution.",
+      "A creature can survive for millions of years, develop one of the most absurd survival strategies imaginable, and still be defeated by a habitat disappearing underneath it.",
+      "## Nature Didn't Get The Memo",
+      "We tend to imagine evolution as a process that produces elegant things.",
+      "Wings.",
+      "Camouflage.",
+      "Sharp claws.",
+      "Speed.",
+      "The bone collector went in another direction.",
+      "It became a caterpillar that:",
+      "- lives inside spider webs",
+      "- steals the spider's food",
+      "- wears dead insects",
+      "- disguises itself as rubbish",
+      "- hunts other caterpillars",
+      "- and occasionally eats its own kind",
+      "And somehow...",
+      "**it works.**",
+      "That's what makes the bone collector so fascinating.",
+      "It isn't a monster.",
+      "It isn't a failed experiment.",
+      "It is an extraordinarily specialised survivor.",
+      "Millions of years of evolution looked at a tiny Hawaiian forest and arrived at this:",
+      "**\"Let's make a caterpillar that wears corpses.\"**",
+      "And nobody can argue with the results.",
+      "So the next time you see an ordinary caterpillar quietly chewing on a leaf, spare it a little respect.",
+      "Because somewhere in Hawaii, its much stranger cousin is crawling through a spider's web wearing a weevil's head on its back.",
+      "And honestly?",
+      "**We have absolutely no idea what evolution is going to come up with next.** 🐛💀",
+    ],
+    relatedExperience: "/surprise",
+    relatedExperienceLabel: "Open a surprise discovery",
+    relatedPlaygrounds: [
+      { label: "Open a surprise discovery", href: "/surprise" },
+      { label: "Browse the Curiosity Journal", href: "/journal" },
+    ],
+    sources: [
+      {
+        label: "University of Hawaiʻi at Mānoa reporting on the bone collector caterpillar discovery (2025).",
+        href: "https://manoa.hawaii.edu/news/article.php?aId=14155",
+      },
+      {
+        label: "Science (2025): research describing the bone collector caterpillar and its web-dwelling behavior.",
+        href: "https://www.science.org/doi/10.1126/science.adu2201",
+      },
+    ],
+    tags: [
+      "bone collector caterpillar",
+      "bone collector caterpillar Hawaii",
+      "caterpillar that wears dead bodies",
+      "caterpillar that wears dead insects",
+      "carnivorous caterpillar",
+      "Hyposmocoma",
+      "strange animals",
+      "bizarre caterpillars",
+      "nature has lost the plot",
+    ],
+    relatedSlugs: ["why-do-cats-purr", "why-do-bananas-curve"],
+    continuationCtaLabel: "Still curious? Explore another strange discovery in the Curiosity Journal →",
+    continuationCtaHref: "/journal",
   },
 ];
 

@@ -4,6 +4,73 @@ import { notFound } from "next/navigation";
 import { getJournalEntryBySlug, getRelatedEntries, journalEntries } from "../../data/journalEntries";
 import JournalPlaygroundLinks from "../../components/JournalPlaygroundLinks";
 
+function renderInlineText(text: string) {
+  return text
+    .split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
+    .filter(Boolean)
+    .map((chunk, index) => {
+      if (chunk.startsWith("**") && chunk.endsWith("**")) {
+        return <strong key={`${chunk}-${index}`}>{chunk.slice(2, -2)}</strong>;
+      }
+
+      if (chunk.startsWith("*") && chunk.endsWith("*")) {
+        return <em key={`${chunk}-${index}`}>{chunk.slice(1, -1)}</em>;
+      }
+
+      return <span key={`${chunk}-${index}`}>{chunk}</span>;
+    });
+}
+
+function renderArticleContent(content: string[]) {
+  const nodes: JSX.Element[] = [];
+
+  for (let index = 0; index < content.length; index += 1) {
+    const line = content[index];
+
+    if (!line.trim()) {
+      continue;
+    }
+
+    if (line.startsWith("## ")) {
+      nodes.push(
+        <h2 key={`h2-${index}`} style={{ margin: "1.25rem 0 0.65rem", fontSize: "1.25rem", lineHeight: 1.35, color: "#1F2937" }}>
+          {renderInlineText(line.slice(3))}
+        </h2>,
+      );
+      continue;
+    }
+
+    if (line.startsWith("- ")) {
+      const items: string[] = [];
+
+      while (index < content.length && content[index].startsWith("- ")) {
+        items.push(content[index].slice(2));
+        index += 1;
+      }
+
+      index -= 1;
+      nodes.push(
+        <ul key={`list-${index}`} style={{ margin: "0 0 0.95rem", paddingLeft: "1.2rem", color: "#4B5563", lineHeight: 1.8, fontSize: "1rem" }}>
+          {items.map((item, itemIndex) => (
+            <li key={`${item}-${itemIndex}`} style={{ marginBottom: "0.3rem" }}>
+              {renderInlineText(item)}
+            </li>
+          ))}
+        </ul>,
+      );
+      continue;
+    }
+
+    nodes.push(
+      <p key={`p-${index}`} style={{ margin: "0 0 0.85rem", color: "#4B5563", lineHeight: 1.8, fontSize: "1rem" }}>
+        {renderInlineText(line)}
+      </p>,
+    );
+  }
+
+  return nodes;
+}
+
 function buildJsonLd(entry: NonNullable<ReturnType<typeof getJournalEntryBySlug>>) {
   return {
     "@context": "https://schema.org",
@@ -42,17 +109,26 @@ export async function generateMetadata({ params }: JournalArticlePageProps): Pro
     };
   }
 
+  const title = entry.seoTitle ?? `${entry.title} | TrendParlour Journal`;
+  const description = entry.metaDescription ?? entry.excerpt;
+  const canonicalUrl = `https://trendparlour.com/journal/${entry.slug}`;
+
   return {
-    title: `${entry.title} | TrendParlour Journal`,
-    description: entry.excerpt,
+    title,
+    description,
     alternates: {
-      canonical: `https://trendparlour.com/journal/${entry.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${entry.title} | TrendParlour Journal`,
-      description: entry.excerpt,
-      url: `https://trendparlour.com/journal/${entry.slug}`,
+      title,
+      description,
+      url: canonicalUrl,
       type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }
@@ -100,6 +176,11 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
               >
                 {entry.category}
               </Link>
+              {entry.series ? (
+                <span style={{ color: "#7A5D2E", fontSize: "0.8rem", fontWeight: 700 }}>
+                  {entry.series}
+                </span>
+              ) : null}
               <span style={{ color: "#6B7280", fontSize: "0.85rem" }}>{entry.readingTime}</span>
             </div>
             <h1 style={{ margin: "0 0 0.7rem", fontSize: "clamp(1.9rem, 3.7vw, 2.6rem)", lineHeight: 1.16, letterSpacing: "-0.025em" }}>
@@ -118,12 +199,23 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
           />
 
           <div style={{ borderRadius: "24px", background: "#FFFDF8", border: "1px solid #E8DDCC", padding: "clamp(1rem, 2.2vw, 1.35rem)", marginBottom: "1rem" }}>
-            {entry.content.map((paragraph) => (
-              <p key={paragraph} style={{ margin: "0 0 0.85rem", color: "#4B5563", lineHeight: 1.8, fontSize: "1rem" }}>
-                {paragraph}
-              </p>
-            ))}
+            {renderArticleContent(entry.content)}
           </div>
+
+          {entry.sources?.length ? (
+            <section style={{ borderRadius: "20px", background: "#FFFDF8", border: "1px solid #E8DDCC", padding: "1rem", marginBottom: "1rem" }}>
+              <h2 style={{ margin: "0 0 0.6rem", fontSize: "1rem", color: "#1F2937" }}>Sources</h2>
+              <ul style={{ margin: 0, paddingLeft: "1.15rem", color: "#4B5563", lineHeight: 1.7 }}>
+                {entry.sources.map((source) => (
+                  <li key={source.href} style={{ marginBottom: "0.45rem" }}>
+                    <a href={source.href} target="_blank" rel="noreferrer" style={{ color: "#1F2937", textDecoration: "underline", textUnderlineOffset: "0.15rem" }}>
+                      {source.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           <JournalPlaygroundLinks
             links={entry.relatedPlaygrounds ?? [{ label: entry.relatedExperienceLabel, href: entry.relatedExperience }]}
@@ -152,8 +244,8 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
           <section style={{ marginTop: "1rem", padding: "0.95rem", borderRadius: "16px", border: "1px solid #E8DDCC", background: "#FFFDF8" }}>
             <h2 style={{ margin: "0 0 0.5rem", fontSize: "1rem" }}>Keep the curiosity going</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-              <Link href={nextJournalHref} style={{ textDecoration: "none", color: "#1F2937", fontWeight: 700 }}>
-                Explore another curiosity →
+              <Link href={entry.continuationCtaHref ?? nextJournalHref} style={{ textDecoration: "none", color: "#1F2937", fontWeight: 700 }}>
+                {entry.continuationCtaLabel ?? "Explore another curiosity →"}
               </Link>
               <Link href="/journal" style={{ textDecoration: "none", color: "#7A5D2E", fontWeight: 700 }}>
                 Back to Curiosity Journal →
