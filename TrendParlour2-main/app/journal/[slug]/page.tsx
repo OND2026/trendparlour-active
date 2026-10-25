@@ -10,7 +10,7 @@ function renderInlineText(text: string) {
     const linkMatch = chunk.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (linkMatch) {
       const [, label, href] = linkMatch;
-      const isExternal = /^https?:\\/\\//.test(href);
+      const isExternal = href.startsWith("http://") || href.startsWith("https://");
       return isExternal
         ? <a key={`${chunk}-${index}`} href={href} target="_blank" rel="noreferrer" style={{ color: "#7A2E52", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: "0.15rem" }}>{label}</a>
         : <Link key={`${chunk}-${index}`} href={href} style={{ color: "#7A2E52", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: "0.15rem" }}>{label}</Link>;
