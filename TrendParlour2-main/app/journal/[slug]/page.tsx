@@ -5,9 +5,9 @@ import { getJournalEntryBySlug, getRelatedEntries, journalEntries } from "../../
 import JournalPlaygroundLinks from "../../components/JournalPlaygroundLinks";
 
 function renderInlineText(text: string) {
-  const tokenPattern = /(\\[[^\\]]+\\]\\([^)]+\\)|\\*\\*[^*]+\\*\\*|\\*[^*]+\\*)/g;
+  const tokenPattern = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g;
   return text.split(tokenPattern).filter(Boolean).map((chunk, index) => {
-    const linkMatch = chunk.match(/^\\[([^\\]]+)\\]\\(([^)]+)\\)$/);
+    const linkMatch = chunk.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (linkMatch) {
       const [, label, href] = linkMatch;
       const isExternal = /^https?:\\/\\//.test(href);
