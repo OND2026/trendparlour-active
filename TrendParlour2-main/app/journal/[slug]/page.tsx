@@ -5,20 +5,20 @@ import { getJournalEntryBySlug, getRelatedEntries, journalEntries } from "../../
 import JournalPlaygroundLinks from "../../components/JournalPlaygroundLinks";
 
 function renderInlineText(text: string) {
-  return text
-    .split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
-    .filter(Boolean)
-    .map((chunk, index) => {
-      if (chunk.startsWith("**") && chunk.endsWith("**")) {
-        return <strong key={`${chunk}-${index}`}>{chunk.slice(2, -2)}</strong>;
-      }
-
-      if (chunk.startsWith("*") && chunk.endsWith("*")) {
-        return <em key={`${chunk}-${index}`}>{chunk.slice(1, -1)}</em>;
-      }
-
-      return <span key={`${chunk}-${index}`}>{chunk}</span>;
-    });
+  const tokenPattern = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  return text.split(tokenPattern).filter(Boolean).map((chunk, index) => {
+    const linkMatch = chunk.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      const [, label, href] = linkMatch;
+      const isExternal = href.startsWith("http://") || href.startsWith("https://");
+      return isExternal
+        ? <a key={`${chunk}-${index}`} href={href} target="_blank" rel="noreferrer" style={{ color: "#7A2E52", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: "0.15rem" }}>{label}</a>
+        : <Link key={`${chunk}-${index}`} href={href} style={{ color: "#7A2E52", fontWeight: 700, textDecoration: "underline", textUnderlineOffset: "0.15rem" }}>{label}</Link>;
+    }
+    if (chunk.startsWith("**") && chunk.endsWith("**")) return <strong key={`${chunk}-${index}`}>{chunk.slice(2, -2)}</strong>;
+    if (chunk.startsWith("*") && chunk.endsWith("*")) return <em key={`${chunk}-${index}`}>{chunk.slice(1, -1)}</em>;
+    return <span key={`${chunk}-${index}`}>{chunk}</span>;
+  });
 }
 
 function renderArticleContent(content: string[]) {
@@ -124,6 +124,7 @@ export async function generateMetadata({ params }: JournalArticlePageProps): Pro
       description,
       url: canonicalUrl,
       type: "article",
+      images: entry.featuredImage ? [{ url: entry.featuredImage.startsWith("http") ? entry.featuredImage : `https://trendparlour.com${entry.featuredImage}` }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
@@ -168,6 +169,7 @@ export default function JournalArticlePage({ params }: JournalArticlePageProps) 
         </nav>
 
         <article>
+          {entry.featuredImage ? <div style={{ marginBottom: "1.1rem", overflow: "hidden", borderRadius: "22px", border: "1px solid #E8DDCC", background: "#FFFDF8" }}><img src={entry.featuredImage} alt="Axi the axolotl surrounded by browser tabs and distractions after opening a phone for one quick task" style={{ display: "block", width: "100%", height: "auto" }} /></div> : null}
           <header style={{ marginBottom: "1.1rem" }}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", alignItems: "center", marginBottom: "0.55rem" }}>
               <Link

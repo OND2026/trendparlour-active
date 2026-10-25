@@ -116,7 +116,7 @@ export default function JournalPage() {
                 </div>
                 <h3 style={{ margin: "0 0 0.4rem", fontSize: "1.1rem", lineHeight: 1.3 }}>
                   <Link href={`/journal/${entry.slug}`} style={{ color: "#1F2937", textDecoration: "none" }}>
-                    {entry.title}
+                    {entry.listingTitle ?? entry.title}
                   </Link>
                 </h3>
                 <p style={{ margin: "0 0 0.7rem", color: "#4B5563", lineHeight: 1.65 }}>{entry.excerpt}</p>
