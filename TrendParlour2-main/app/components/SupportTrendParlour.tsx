@@ -8,6 +8,7 @@ type SupportCard = {
   description: string;
   buttonLabel: string;
   disabled?: boolean;
+  href?: string;
 };
 
 const supportCards: SupportCard[] = [
@@ -22,7 +23,8 @@ const supportCards: SupportCard[] = [
     icon: "🎁",
     title: "Merch",
     description: "Tiny surprises you can wear.",
-    buttonLabel: "Coming Soon",
+    buttonLabel: "Shop on Redbubble",
+    href: "https://www.redbubble.com/people/TMMDI/shop",
   },
   {
     icon: "⭐",
@@ -80,7 +82,7 @@ export default function SupportTrendParlour() {
           gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
         }}
       >
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <article
             key={card.title}
             className="support-card"
@@ -128,6 +130,12 @@ export default function SupportTrendParlour() {
             <button
               type="button"
               disabled={card.disabled}
+              onClick={
+                card.href
+                  ? () => window.open(card.href, "_blank", "noopener,noreferrer")
+                  : undefined
+              }
+              aria-label={card.href ? "Open TrendParlour merchandise shop on Redbubble in a new tab" : undefined}
               style={{
                 marginTop: "0.9rem",
                 border: "none",
@@ -137,7 +145,7 @@ export default function SupportTrendParlour() {
                 fontWeight: 600,
                 color: card.disabled ? "#7A7A72" : "#1F2937",
                 background: card.disabled ? "#F0E9DE" : "#F4E6C9",
-                cursor: card.disabled ? "not-allowed" : "pointer",
+                cursor: card.disabled ? "not-allowed" : card.href ? "pointer" : "default",
                 transition: "transform 0.2s ease, box-shadow 0.2s ease",
               }}
             >
