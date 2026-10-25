@@ -7,6 +7,7 @@ type SupportCard = {
   title: string;
   description: string;
   buttonLabel: string;
+  href?: string;
   disabled?: boolean;
 };
 
@@ -22,7 +23,8 @@ const supportCards: SupportCard[] = [
     icon: "🎁",
     title: "Merch",
     description: "Tiny surprises you can wear.",
-    buttonLabel: "Coming Soon",
+    buttonLabel: "Explore the Shop",
+    href: "https://www.redbubble.com/people/TMMDI/shop",
   },
   {
     icon: "⭐",
@@ -80,7 +82,7 @@ export default function SupportTrendParlour() {
           gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
         }}
       >
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <article
             key={card.title}
             className="support-card"
@@ -125,24 +127,48 @@ export default function SupportTrendParlour() {
               </p>
             </div>
 
-            <button
-              type="button"
-              disabled={card.disabled}
-              style={{
-                marginTop: "0.9rem",
-                border: "none",
-                borderRadius: "999px",
-                padding: "0.7rem 0.9rem",
-                fontSize: "0.86rem",
-                fontWeight: 600,
-                color: card.disabled ? "#7A7A72" : "#1F2937",
-                background: card.disabled ? "#F0E9DE" : "#F4E6C9",
-                cursor: card.disabled ? "not-allowed" : "pointer",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              }}
-            >
-              {card.buttonLabel}
-            </button>
+            {card.href ? (
+              <a
+                href={card.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "block",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  marginTop: "0.9rem",
+                  borderRadius: "999px",
+                  padding: "0.7rem 0.9rem",
+                  fontSize: "0.86rem",
+                  fontWeight: 600,
+                  color: "#1F2937",
+                  background: "#F4E6C9",
+                  cursor: "pointer",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+              >
+                {card.buttonLabel}
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled={card.disabled}
+                style={{
+                  marginTop: "0.9rem",
+                  border: "none",
+                  borderRadius: "999px",
+                  padding: "0.7rem 0.9rem",
+                  fontSize: "0.86rem",
+                  fontWeight: 600,
+                  color: card.disabled ? "#7A7A72" : "#1F2937",
+                  background: card.disabled ? "#F0E9DE" : "#F4E6C9",
+                  cursor: card.disabled ? "not-allowed" : "pointer",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+              >
+                {card.buttonLabel}
+              </button>
+            )}
           </article>
         ))}
       </div>
