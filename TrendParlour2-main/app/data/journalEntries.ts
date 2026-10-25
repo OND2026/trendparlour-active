@@ -21,6 +21,8 @@ export type JournalSourceLink = {
 export type JournalEntry = {
   slug: string;
   title: string;
+  listingTitle?: string;
+  featuredImage?: string;
   excerpt: string;
   category: string;
   categorySlug: JournalCategorySlug;
@@ -91,6 +93,100 @@ export const journalCategories: JournalCategory[] = [
 ];
 
 export const journalEntries: JournalEntry[] = [
+{
+  "slug": "went-online-for-one-thing",
+  "title": "I Went Online for One Thing and Came Back With 37 Tabs, a New Personality, and No Memory of Why I Opened My Phone",
+  "listingTitle": "I Opened My Phone for One Thing. The Internet Had Other Plans.",
+  "featuredImage": "/images/phone-tabs-axi.svg",
+  "excerpt": "Ever opened your phone for one quick task and emerged 40 minutes later knowing everything except what you came to do? Welcome to the internet.",
+  "category": "Internet Culture",
+  "categorySlug": "internet-culture",
+  "publishedAt": "2026-10-25",
+  "updatedAt": "2026-10-25",
+  "readingTime": "8 min read",
+  "seoTitle": "I Opened My Phone for One Thing. The Internet Had Other Plans. | TrendParlour",
+  "metaDescription": "Ever opened your phone for one quick task and emerged 40 minutes later knowing everything except what you came to do? Welcome to the internet.",
+  "content": [
+    "There was a time when a person could sit quietly for five minutes without needing external stimulation. They could stare out of a window. Watch a bird. Contemplate the meaning of life. Perhaps even finish a thought.",
+    "Those people are gone.",
+    "Today, if the Wi-Fi disappears for eleven seconds, we begin examining our lives like detectives in a crime documentary. Who are we? What are we doing here? Why is the router blinking like that? Is this how civilisation ends?",
+    "Welcome to the modern internet, where a quick check of the weather can become a documentary about deep-sea creatures, three online purchases, and a sudden belief that you should learn Italian. You came for one thing. You left with 37 tabs, a new personality, and absolutely no memory of the original mission.",
+    "## The Innocent Beginning",
+    "Every internet adventure begins with a noble intention. You need to check the weather, reply to a message, or find out whether the supermarket is open. Maybe you are looking up the name of an actor who appeared in a film you watched three years ago. Simple tasks. Ordinary tasks. Tasks that should require the intellectual resources of a moderately alert goldfish.",
+    "You unlock your phone with the focus of a surgeon. You open the browser. You type two words. Then an alert appears. Someone has sent you a video. It is apparently urgent. The thumbnail contains a dog wearing sunglasses, and the caption says, “I cannot believe this happened.” You are a responsible person, but you are not made of stone. You watch the video.",
+    "The dog is not wearing sunglasses. It is wearing tiny goggles, which somehow makes the situation more compelling. The comments are funnier than the video. One comment leads to a profile. The profile leads to another video. Somewhere, the weather app is quietly wondering whether you are alive.",
+    "## The Algorithm Knows You Better Than Your Family Does",
+    "The internet has a remarkable talent for discovering what interests you. You pause on one clip about houseplants and suddenly every plant on Earth is being presented for your consideration. A fern appears. A cactus appears. A person explains why your peace lily is disappointed in you. You did not know plants could communicate disappointment. You now suspect yours has been keeping a diary.",
+    "The algorithm notices that you watched a video about a tiny home in the woods. Within minutes, it has assembled an alternative life for you. You will live in a cabin, make sourdough, wear linen, and become the sort of person who says “the land is teaching me patience” while holding a mug the size of a flowerpot. In real life, you killed a basil plant while it was still in the supermarket bag.",
+    "The algorithm does not judge. It simply remembers. You linger on a productivity video and it decides you are a productivity enthusiast. You watch one clip about budgeting and it sends you seventeen ways to save money, including a method that requires buying six storage containers and a label maker. It has no idea who you are, technically. Yet it knows you are likely to watch “Things You Didn’t Know You Needed” while avoiding the one thing you actually need to do.",
+    "## The Group Chat Is a Social Experiment That Escaped the Laboratory",
+    "No online journey is complete without a group chat. It can be a place of love, friendship, logistics, and the occasional blurry photograph that nobody can identify. It can also become a 186-message investigation into whether a person in the background of a video is someone’s cousin.",
+    "One friend sends a meme. Another replies with seven crying emojis. A third asks what everyone is doing on Saturday. Nobody answers the question, but four people send more memes. By lunchtime, somebody has changed the group name to something that sounds like a failed government department. If you reply immediately, you appear available. If you reply three days later, you appear mysterious, busy, or possibly deceased.",
+    "Voice notes introduce another layer of complexity. “Quick voice note” can mean twelve seconds or a full audio series with a beginning, middle, and unresolved emotional subplot. You press play expecting a simple update. Two minutes later, you know the speaker’s entire journey to the bus stop, the history of a disagreement from 2019, and the name of a person you have never met but now strongly dislike.",
+    "And yet, you keep checking. The group chat is exhausting, confusing, and often the only place where a photo of burnt toast can receive the attention it deserves.",
+    "## The Mysterious Disappearance of Five Minutes",
+    "Time behaves strangely online. In the physical world, five minutes is enough to boil a kettle or stand in front of the fridge deciding whether cheese counts as a meal. Online, five minutes is a portal.",
+    "You watch one short video. It is thirty seconds long. The next one is twenty seconds. The next is somehow about a man who has spent eleven years building a miniature railway in his garden. You do not care about miniature railways. You now care deeply about this man’s railway.",
+    "Then you look up and discover that forty minutes have passed. The kettle is cold. Your food is still in the microwave. Your phone is warm enough to qualify as a minor household appliance. Your brain has retained a vague impression of a dancing parrot, an argument about pasta, and a person restoring a rusty knife. The details are gone. The time is gone. The knife, presumably, is now beautiful.",
+    "## We Have Developed the Attention Span of a Microwave",
+    "The internet has trained us to expect something interesting every few seconds. A pause feels suspicious. A loading circle feels personal. A long paragraph can trigger the same response as a fire alarm in a library. We read a headline, skim the first sentence, jump to the comments, and then confidently explain the story to someone else. We have absorbed the emotional atmosphere of the information without necessarily meeting the information itself.",
+    "This is why you can watch a forty-minute video at double speed but struggle to listen to a friend explain their day without checking whether your phone has received a message that says “hey”. It has not. It has received a promotional notification about socks.",
+    "We are surrounded by systems designed to make the next thing feel more urgent than the current thing. Every app wants a slice of our attention, and every slice arrives with confetti, a vibration, or a red number in a circle. Waiting for a bus? Phone. Standing in a queue? Phone. Walking from one room to another? Phone. We have reached the point where we would rather watch a stranger make lunch than experience the tiny miracle of being alive in a queue.",
+    "Perhaps the solution is to put the phone down. But first, let us search for the best way to put a phone down. There are probably twelve videos about it.",
+    "## Online Shopping: Because Apparently We Need More Things",
+    "Shopping online begins with a practical need. You require a charger. You search for a charger. The internet offers chargers, cable organisers, a desk mat, a lamp shaped like a mushroom, and a device that claims to improve your posture by making sitting down feel like a competitive sport.",
+    "You add the charger to your basket. Then you remember delivery is free if you spend a little more. Suddenly, you are the finance director of a company whose strategy is avoiding a £2.99 delivery fee by spending £24.99 on things you did not know existed.",
+    "The basket becomes a museum of possible futures. There is the version of you who journals every morning, the version who makes perfect coffee, and the version who owns matching glass containers and never loses a lid. They all live in your basket, waiting for checkout to turn them into reality. Then the parcel arrives, and you place the item somewhere so safe you will never see it again until you move house.",
+    "If the internet has ever made you question your attention span, your spending habits, or whether you have a personality outside the memes you share, meet the “My Life Is a Meme” mug. It is perfect for morning coffee, late-night scrolling, and pretending you have your life together during online meetings. You can [check out the “My Life Is a Meme” mug on Redbubble](https://www.redbubble.com/i/mug/My-life-is-a-meme-by-TMMDI/101670463/7yqg).",
+    "It is a mug, not a complete life plan. But it can hold coffee while you reconsider the life plan, and that is a start.",
+    "## The Internet Has Made Everyone an Expert",
+    "A person watches one video about nutrition and becomes a nutrition consultant. Someone reads a thread about investing and begins speaking in charts. Another watches a documentary about ancient history and is suddenly prepared to challenge every museum in Europe. The confidence is impressive. The evidence is occasionally hiding behind a curtain.",
+    "The internet is genuinely wonderful for learning. It can help you repair a tap, understand a complicated topic, learn a language, or discover that the noise your washing machine makes is not the sound of a small aircraft attempting take-off. But the same search bar that brings you a university lecture can bring you a stranger explaining that all historical events were secretly caused by a missing sandwich.",
+    "The challenge is not finding information. It is figuring out which information deserves your trust. If a post makes you instantly furious, instantly superior, or instantly certain that everyone else is an idiot, pause before sharing it. Certainty is not proof. A dramatic thumbnail is not a qualification. And “I did my own research” is not a bibliography.",
+    "You can be curious without pretending to know everything. In fact, curiosity works better when you leave a little room for “I might be wrong”. The internet has enough loud certainty already. It could use a few more people who are willing to check.",
+    "## So Why Do We Keep Coming Back?",
+    "Because the internet is not only a machine for stealing time. It is also where people find friends, learn astonishing things, laugh at the same ridiculous animal, discover communities, and feel less alone in a very large world. A stranger’s joke can rescue a difficult afternoon. A free tutorial can teach you a skill that changes your career. A niche interest can lead you to thousands of people who are equally delighted by it.",
+    "The problem is not that the internet is all bad. The problem is that the good stuff sits beside endless noise, and the noise has learned how to shout in neon.",
+    "We do not need to abandon the internet and move into a cabin with our sourdough starter. We could begin with smaller acts of rebellion. Open the app with a purpose. Turn off a few notifications. Leave a group chat unread until you have the energy for it. Put the phone across the room while you eat. Remember that a video can wait, even if its caption insists it cannot.",
+    "And when you do fall down a rabbit hole, make it a good one. Learn why the moon looks larger near the horizon. Find out how octopuses taste with their arms. Discover a weird corner of history. Laugh at something so silly you have to send it to three friends immediately. Curiosity is a lovely thing. It just deserves to be the driver sometimes, instead of a passenger tied to the roof of an algorithm-powered bus.",
+    "## A Final Experiment",
+    "The next time you pick up your phone, say out loud what you intend to do. “I am checking the weather.” “I am replying to my sister.” “I am looking up whether the shop is open.” Then do that thing. Close the app. Put the phone down. Enjoy the quiet victory of a mission completed.",
+    "If you get distracted, do not panic. You are human. The internet is designed by people who have studied how humans behave, and some of them have budgets larger than small countries. You were never going to win every round. But you can choose what happens next: return to your original task, or deliberately explore something interesting instead of drifting into it by accident.",
+    "If you have a spare moment after that, come over to TrendParlour and tap [Surprise Me](/surprise). We cannot promise you will leave with fewer tabs, but we can promise a fresh little detour with a purpose.",
+    "Now, if you will excuse me, I need to check the weather. I have opened seventeen tabs and accidentally learned how to make cheese."
+  ],
+  "relatedExperience": "/surprise",
+  "relatedExperienceLabel": "Try Surprise Me",
+  "relatedPlaygrounds": [
+    {
+      "label": "Surprise Me",
+      "href": "/surprise"
+    },
+    {
+      "label": "Make me laugh",
+      "href": "/laugh"
+    },
+    {
+      "label": "Let me play",
+      "href": "/play"
+    }
+  ],
+  "tags": [
+    "internet culture",
+    "attention span",
+    "social media",
+    "online shopping",
+    "memes",
+    "digital habits",
+    "humour"
+  ],
+  "relatedSlugs": [
+    "why-did-the-internet-invent-the-404-error",
+    "why-is-ok-such-a-strange-word"
+  ],
+  "continuationCtaLabel": "Surprise me with something else →",
+  "continuationCtaHref": "/surprise"
+},
   {
     slug: "why-is-a-computer-mouse-called-a-mouse",
     title: "Why is a computer mouse called a mouse?",
