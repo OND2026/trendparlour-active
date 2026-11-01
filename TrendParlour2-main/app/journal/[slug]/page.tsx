@@ -31,7 +31,7 @@ function renderArticleContent(content: string[]) {
       continue;
     }
 
-    const imageMatch = line.match(/^!\\[([^\\]]*)\\]\\(([^)]+)\\)$/);
+    const imageMatch = line.match(/^!\[([^]]*)\]\(([^)]+)\)$/);
     if (imageMatch) {
       nodes.push(
         <figure key={`image-${index}`} style={{ margin: "1.4rem 0", overflow: "hidden", borderRadius: "18px", border: "1px solid #E8DDCC", background: "#FBF6EE" }}>
