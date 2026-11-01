@@ -31,6 +31,17 @@ function renderArticleContent(content: string[]) {
       continue;
     }
 
+    const imageMatch = line.match(/^!\[([^]]*)\]\(([^)]+)\)$/);
+    if (imageMatch) {
+      nodes.push(
+        <figure key={`image-${index}`} style={{ margin: "1.4rem 0", overflow: "hidden", borderRadius: "18px", border: "1px solid #E8DDCC", background: "#FBF6EE" }}>
+          <img src={imageMatch[2]} alt={imageMatch[1]} loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
+          {imageMatch[1] ? <figcaption style={{ padding: "0.55rem 0.8rem", color: "#7A5D2E", fontSize: "0.82rem", textAlign: "center" }}>{imageMatch[1]}</figcaption> : null}
+        </figure>,
+      );
+      continue;
+    }
+
     if (line.startsWith("## ")) {
       nodes.push(
         <h2 key={`h2-${index}`} style={{ margin: "1.25rem 0 0.65rem", fontSize: "1.25rem", lineHeight: 1.35, color: "#1F2937" }}>
